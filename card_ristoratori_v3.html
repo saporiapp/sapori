@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saporì — Per i ristoratori</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:#2A1A0E;color:#fff;min-height:100vh;}
+.card{max-width:480px;margin:0 auto;background:linear-gradient(160deg,#2A1A0E 0%,#3d1e08 60%,#2A1A0E 100%);min-height:100vh;display:flex;flex-direction:column;position:relative;overflow:hidden;}
+.top-bar{height:6px;background:linear-gradient(90deg,#E8831A,#C8341A,#E8831A);flex-shrink:0;}
+.header{padding:28px 28px 16px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.logo{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;font-style:italic;color:#F5E6C8;}
+.logo span{color:#E8831A;}
+.badge{background:#E8831A;color:#fff;padding:6px 14px;border-radius:3px;font-size:.72rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;}
+.eyebrow{padding:0 28px 10px;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,230,200,.55);display:flex;align-items:center;gap:10px;}
+.eyebrow::before{content:'';display:block;width:24px;height:2px;background:#E8831A;flex-shrink:0;}
+.headline{padding:8px 28px 24px;font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;line-height:1.0;color:#fff;letter-spacing:-.02em;}
+.headline em{font-style:italic;color:#E8831A;display:block;}
+.math-block{margin:0 28px 20px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:22px 24px;}
+.block-title{font-size:.7rem;font-weight:700;color:rgba(245,230,200,.52);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;}
+.mrow{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:.88rem;}
+.mrow:last-child{border-bottom:none;}
+.mrow.tot{border-top:2px solid rgba(232,131,26,.4);padding-top:13px;margin-top:4px;}
+.mrow .ml{color:rgba(255,255,255,.6);font-weight:300;}
+.mrow .mv{color:#fff;}
+.mrow.tot .ml{color:#F5E6C8;font-weight:600;}
+.mrow.tot .mv{color:#E8831A;font-weight:800;font-size:1.05rem;font-family:'Playfair Display',serif;}
+.math-note{margin-top:13px;font-size:.77rem;color:rgba(255,255,255,.36);font-style:italic;line-height:1.5;}
+.features{padding:0 28px 20px;display:flex;flex-direction:column;}
+.frow{display:flex;align-items:flex-start;gap:14px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.frow:last-child{border-bottom:none;}
+.frow .ico{font-size:1.5rem;flex-shrink:0;margin-top:2px;}
+.frow strong{display:block;font-size:.9rem;font-weight:600;color:#fff;margin-bottom:2px;}
+.frow span{font-size:.8rem;color:rgba(255,255,255,.5);font-weight:300;line-height:1.45;}
+.model-highlight{margin:0 28px 20px;background:rgba(232,131,26,.1);border:1px solid rgba(232,131,26,.25);border-radius:8px;padding:16px 22px;text-align:center;}
+.mh-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#E8831A;line-height:1;}
+.mh-label{font-size:.78rem;color:rgba(255,255,255,.45);margin-top:4px;font-style:italic;}
+.cta-block{margin-top:auto;background:rgba(232,131,26,.18);border-top:2px solid rgba(232,131,26,.3);padding:28px;flex-shrink:0;}
+.cta-label{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,230,200,.45);margin-bottom:8px;}
+.cta-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#fff;line-height:1.15;margin-bottom:20px;}
+.cta-title em{font-style:italic;color:#E8831A;}
+.cta-url{display:block;background:#E8831A;color:#fff;padding:14px 24px;border-radius:3px;font-size:.92rem;font-weight:700;text-align:center;text-decoration:none;margin-bottom:10px;}
+.cta-domain{font-size:.78rem;color:rgba(255,255,255,.3);text-align:center;}
+.deco{position:absolute;font-size:8rem;opacity:.04;pointer-events:none;}
+.d1{top:100px;right:-10px;transform:rotate(20deg);}
+.d2{bottom:220px;left:-20px;transform:rotate(-12deg);font-size:6rem;}
+.card>*:not(.deco){position:relative;z-index:1;}
+</style>
+</head>
+<body>
+<div class="card">
+  <span class="deco d1">🍝</span>
+  <span class="deco d2">🐟</span>
+  <div class="top-bar"></div>
+  <div class="header">
+    <div class="logo">Sapor<span>ì</span></div>
+    <div class="badge">Per i ristoranti</div>
+  </div>
+  <div class="eyebrow">Una proposta per te</div>
+  <div class="headline">Diventa la<br>cucina<br><em>dell'hotel.</em></div>
+  <div class="math-block">
+    <div class="block-title">Il modello economico</div>
+    <div class="mrow"><span class="ml">Tuo prezzo di listino</span><span class="mv">€ 35</span></div>
+    <div class="mrow"><span class="ml">Prezzo mostrato all'ospite (+20%)</span><span class="mv">€ 42</span></div>
+    <div class="mrow"><span class="ml">Coordinamento ordini</span><span class="mv">gestito da Saporì</span></div>
+    <div class="mrow tot"><span class="ml">Incassi tu</span><span class="mv">€ 35</span></div>
+    <div class="math-note">Il +20% è trattenuto da Saporì per gestire piattaforma e ordini. Tu incassi sempre il tuo prezzo pieno.</div>
+  </div>
+  <div class="features">
+    <div class="frow"><span class="ico">🏨</span><div><strong>L'hotel diventa il tuo canale</strong><span>L'albergatore ti sceglie come partner. I suoi ospiti diventano tuoi clienti fissi per tutta la stagione.</span></div></div>
+    <div class="frow"><span class="ico">📅</span><div><strong>Menu settimanale concordato</strong><span>Base fissa con l'albergatore. Pianifichi la cucina senza caos quotidiano.</span></div></div>
+    <div class="frow"><span class="ico">📋</span><div><strong>Ordini programmati in anticipo</strong><span>Ricevi l'elenco prima del servizio. Zero sorprese.</span></div></div>
+    <div class="frow"><span class="ico">🚫</span><div><strong>Zero costi di ingresso</strong><span>Nessuna fee, nessun abbonamento. Guadagni solo quando vendi.</span></div></div>
+    <div class="frow"><span class="ico">🕐</span><div><strong>Tu scegli le fasce orarie</strong><span>Colazione, pranzo, cena — decidi quali coprire in base ai tuoi orari operativi.</span></div></div>
+  </div>
+  <div class="model-highlight">
+    <div class="mh-num">+€525</div>
+    <div class="mh-label">Fatturato aggiuntivo stimato su 15 ordini/giorno al tuo listino</div>
+  </div>
+  <div class="cta-block">
+    <div class="cta-label">Bellaria-Igea Marina · Estate 2026</div>
+    <div class="cta-title">Interessato?<br><em>Parliamoci.</em></div>
+    <a href="https://TOUSERNAME.github.io/sapori/#contatti" class="cta-url">Iscriviti su sapori.app →</a>
+    <div class="cta-domain">info@sapori.app</div>
+  </div>
+</div>
+</body>
+</html>

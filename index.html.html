@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saporì — Il buon cibo ti raggiunge in vacanza</title>
+<meta name="description" content="Saporì porta colazione, pranzo e cena dai migliori ristoranti locali direttamente agli ospiti del tuo hotel. Zero costi per l'hotel, zero burocrazia per il ristorante.">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<!-- Google Analytics 4 — sostituisci G-XXXXXXXXXX con il tuo Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<!-- PostHog — sostituisci YOUR_POSTHOG_KEY con la tua chiave -->
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[],e[a]=[],a="init";u.length;){var d=u.shift();g(u,d)}g(e,"init"),g(e,"capture"),g(e,"reset"),g(e,"identify"),g(e,"set_config")}(p,r),e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||(window.posthog=[]));
+  posthog.init('YOUR_POSTHOG_KEY',{api_host:'https://eu.i.posthog.com'});
+</script>
+
+<style>
+:root {
+  --rosso:   #C8341A;
+  --rosso-s: #9E2412;
+  --arancio: #E8831A;
+  --sabbia:  #F5E6C8;
+  --sabbia-s:#EDD9A3;
+  --crema:   #FDF6E9;
+  --terra:   #7A3B1E;
+  --bianco:  #FFFDF7;
+  --testo:   #2A1A0E;
+  --testo-m: #6B4423;
+  --scuro:   #1C0E05;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'DM Sans',sans-serif;background:var(--bianco);color:var(--testo);overflow-x:hidden;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 64px;background:rgba(255,253,247,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,52,26,.12);transition:box-shadow .3s;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;font-style:italic;color:var(--rosso);text-decoration:none;}
+.nav-logo span{color:var(--arancio);}
+.nav-links{display:flex;gap:36px;align-items:center;}
+.nav-links a{font-size:.85rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--testo-m);text-decoration:none;transition:color .2s;}
+.nav-links a:hover{color:var(--rosso);}
+.nav-cta{background:var(--rosso)!important;color:#fff!important;padding:10px 26px;border-radius:2px;}
+.nav-cta:hover{background:var(--rosso-s)!important;}
+
+/* UTILS */
+.eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--rosso);display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.eyebrow::before{content:'';display:block;width:28px;height:2px;background:var(--rosso);flex-shrink:0;}
+.eyebrow.center{justify-content:center;}
+.eyebrow.center::before{display:none;}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);line-height:1.08;font-weight:900;margin-bottom:18px;color:var(--testo);}
+.sec-title em{font-style:italic;color:var(--rosso);}
+.sec-lead{font-size:1.02rem;line-height:1.78;color:var(--testo-m);font-weight:300;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--rosso);color:#fff;padding:14px 30px;font-size:.93rem;font-weight:600;border:none;border-radius:2px;cursor:pointer;text-decoration:none;transition:all .25s;letter-spacing:.01em;font-family:'DM Sans',sans-serif;}
+.btn-primary:hover{background:var(--rosso-s);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,52,26,.28);}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--testo);padding:14px 30px;font-size:.93rem;font-weight:500;border:1.5px solid var(--sabbia-s);border-radius:2px;cursor:pointer;text-decoration:none;transition:all .25s;font-family:'DM Sans',sans-serif;}
+.btn-secondary:hover{border-color:var(--rosso);color:var(--rosso);}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.vis{opacity:1;transform:translateY(0);}
+
+/* HERO */
+.hero{min-height:100vh;background:linear-gradient(148deg,var(--sabbia) 0%,var(--crema) 52%,#fff8ee 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 96px 90px;position:relative;overflow:hidden;gap:60px;}
+.hero-glow{position:absolute;right:-100px;top:45%;transform:translateY(-50%);width:650px;height:650px;border-radius:50%;background:radial-gradient(circle,rgba(232,131,26,.15) 0%,transparent 68%);pointer-events:none;}
+.hero-left{position:relative;z-index:1;}
+.hero-eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--rosso);display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:2px;background:var(--rosso);}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3.2rem,4.8vw,5.2rem);line-height:.95;font-weight:900;color:var(--testo);margin-bottom:10px;letter-spacing:-.025em;}
+.hero-title em{font-style:italic;color:var(--rosso);display:block;}
+.hero-sub{font-size:1.12rem;line-height:1.72;color:var(--testo-m);max-width:470px;margin:16px 0 42px;font-weight:300;}
+.hero-sub strong{color:var(--testo);font-weight:600;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.hero-pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
+.hero-pill{background:rgba(200,52,26,.07);border:1px solid rgba(200,52,26,.18);color:var(--rosso);padding:6px 15px;border-radius:100px;font-size:.8rem;font-weight:500;}
+
+/* phone mockup */
+.hero-right{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;}
+.phone-wrap{position:relative;}
+.phone-frame{width:255px;height:455px;background:#1a0c04;border-radius:34px;box-shadow:0 40px 80px rgba(0,0,0,.22),0 0 0 7px #2e1c0c;overflow:hidden;position:relative;z-index:2;}
+.phone-screen{width:100%;height:100%;background:linear-gradient(180deg,var(--sabbia) 0%,var(--crema) 100%);padding:22px 12px 16px;display:flex;flex-direction:column;gap:7px;}
+.ph-logo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;font-style:italic;color:var(--rosso);text-align:center;}
+.ph-hotel{font-size:.49rem;color:var(--testo-m);text-align:center;margin-bottom:4px;letter-spacing:.07em;text-transform:uppercase;}
+.ph-section{font-size:.54rem;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;}
+.ph-card{background:#fff;border-radius:7px;padding:7px 9px;box-shadow:0 2px 6px rgba(0,0,0,.07);display:flex;align-items:center;gap:7px;}
+.ph-emoji{font-size:1.3rem;}
+.ph-name{font-size:.56rem;font-weight:600;color:var(--testo);}
+.ph-rest{font-size:.47rem;color:var(--testo-m);margin-top:1px;}
+.ph-price{font-size:.62rem;font-weight:700;color:var(--rosso);margin-left:auto;white-space:nowrap;}
+.ph-cta{background:var(--rosso);color:#fff;border-radius:5px;padding:7px;text-align:center;font-size:.55rem;font-weight:600;letter-spacing:.04em;margin-top:2px;}
+.ph-tag1{position:absolute;right:-16px;top:68px;z-index:3;background:#3D6B2C;color:#fff;padding:5px 11px;border-radius:20px;font-size:.57rem;font-weight:600;box-shadow:0 4px 12px rgba(61,107,44,.3);white-space:nowrap;}
+.ph-tag2{position:absolute;left:-28px;bottom:100px;z-index:3;background:#fff;color:var(--testo);padding:8px 11px;border-radius:9px;font-size:.55rem;font-weight:500;box-shadow:0 6px 20px rgba(0,0,0,.12);border:1px solid var(--sabbia-s);white-space:nowrap;}
+.ph-tag2 strong{display:block;font-size:.66rem;color:var(--rosso);font-weight:700;}
+.float-food{position:absolute;font-size:1.9rem;animation:floatY 3s ease-in-out infinite;pointer-events:none;}
+.ff1{top:18px;left:8px;animation-delay:0s;}
+.ff2{top:48px;right:-2px;animation-delay:.9s;font-size:1.5rem;}
+.ff3{bottom:65px;right:-4px;animation-delay:1.8s;}
+.ff4{bottom:28px;left:4px;animation-delay:.4s;font-size:1.4rem;}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+
+/* STATS */
+.stats-bar{background:var(--rosso);display:grid;grid-template-columns:repeat(4,1fr);}
+.stat-item{text-align:center;color:#fff;padding:30px 20px;border-right:1px solid rgba(255,255,255,.16);}
+.stat-item:last-child{border-right:none;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:900;line-height:1;margin-bottom:5px;}
+.stat-lbl{font-size:.75rem;opacity:.8;letter-spacing:.07em;text-transform:uppercase;}
+
+/* COME FUNZIONA */
+.how-sec{background:var(--crema);padding:96px;}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px;}
+.how-card{background:#fff;padding:42px 30px;position:relative;overflow:hidden;transition:transform .3s;}
+.how-card:hover{transform:translateY(-4px);}
+.how-card::before{content:attr(data-n);position:absolute;top:-18px;right:14px;font-family:'Playfair Display',serif;font-size:7rem;font-weight:900;color:var(--sabbia);line-height:1;pointer-events:none;}
+.how-card .icon{font-size:2.1rem;margin-bottom:16px;display:block;}
+.how-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin-bottom:9px;color:var(--testo);}
+.how-card p{font-size:.9rem;line-height:1.68;color:var(--testo-m);font-weight:300;}
+
+/* TABS */
+.tabs-sec{background:var(--bianco);padding:96px 0;}
+.tabs-header{padding:0 96px;}
+.tab-nav{display:flex;border-bottom:2px solid var(--sabbia-s);margin:40px 96px 0;}
+.tab-btn{padding:13px 34px;font-size:.9rem;font-weight:500;border:none;background:transparent;cursor:pointer;color:var(--testo-m);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;font-family:'DM Sans',sans-serif;}
+.tab-btn.active{color:var(--rosso);border-bottom-color:var(--rosso);font-weight:600;}
+.tab-body{padding:52px 96px;}
+.tab-pane{display:none;}
+.tab-pane.active{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
+.pane-l h2{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:800;line-height:1.18;margin-bottom:14px;color:var(--testo);}
+.pane-l h2 em{font-style:italic;color:var(--rosso);}
+.pane-l p{font-size:.96rem;line-height:1.74;color:var(--testo-m);margin-bottom:28px;font-weight:300;}
+.benefit-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:34px;}
+.benefit-list li{display:flex;align-items:flex-start;gap:11px;font-size:.91rem;color:var(--testo);line-height:1.52;}
+.benefit-list li .ck{flex-shrink:0;width:19px;height:19px;background:var(--rosso);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;margin-top:2px;}
+.pane-r{background:linear-gradient(135deg,var(--sabbia) 0%,var(--sabbia-s) 100%);border-radius:4px;padding:42px;position:relative;overflow:hidden;}
+.pane-r::after{content:attr(data-icon);position:absolute;bottom:-22px;right:-8px;font-size:8rem;opacity:.09;pointer-events:none;}
+.pane-r blockquote{font-family:'Playfair Display',serif;font-size:1.2rem;line-height:1.58;color:var(--terra);font-style:italic;margin-bottom:18px;}
+.pane-r cite{font-size:.77rem;color:var(--testo-m);font-style:normal;font-weight:500;letter-spacing:.04em;text-transform:uppercase;}
+.highlight-box{background:#fff;border-radius:4px;padding:16px 20px;margin-top:20px;border-left:3px solid var(--rosso);}
+.highlight-box strong{display:block;font-size:1.45rem;color:var(--rosso);font-family:'Playfair Display',serif;}
+.highlight-box span{font-size:.8rem;color:var(--testo-m);}
+
+/* STEPS */
+.steps-sec{background:var(--scuro);padding:96px;}
+.steps-sec .eyebrow{color:var(--sabbia);}
+.steps-sec .eyebrow::before{background:var(--sabbia);}
+.steps-sec .sec-title{color:#fff;}
+.steps-sec .sec-title em{color:var(--arancio);}
+.steps-sec .sec-lead{color:rgba(255,255,255,.5);max-width:520px;}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:52px;}
+.step-card{background:rgba(255,255,255,.05);padding:34px 22px;border:1px solid rgba(255,255,255,.07);position:relative;transition:background .3s;}
+.step-card:hover{background:rgba(255,255,255,.09);}
+.step-n{font-family:'Playfair Display',serif;font-size:2.7rem;font-weight:900;color:var(--rosso);line-height:1;margin-bottom:13px;}
+.step-card h3{font-size:.96rem;font-weight:600;color:#fff;margin-bottom:7px;}
+.step-card p{font-size:.84rem;line-height:1.62;color:rgba(255,255,255,.48);font-weight:300;}
+.step-arr{position:absolute;right:-11px;top:50%;transform:translateY(-50%);color:var(--arancio);font-size:1.1rem;z-index:2;}
+.step-card:last-child .step-arr{display:none;}
+
+/* RISTORATORI */
+.risto-sec{display:grid;grid-template-columns:1fr 1fr;}
+.risto-l{padding:96px 80px;background:var(--sabbia);}
+.risto-r{padding:96px 80px;background:var(--rosso);color:#fff;display:flex;flex-direction:column;justify-content:center;}
+.risto-r .eyebrow{color:rgba(255,255,255,.6);}
+.risto-r .eyebrow::before{background:rgba(255,255,255,.35);}
+.risto-r .sec-title{color:#fff;}
+.risto-r .sec-lead{color:rgba(255,255,255,.7);max-width:420px;}
+.math-box{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);border-radius:4px;padding:24px 28px;margin-top:26px;}
+.math-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.09);font-size:.87rem;}
+.math-row:last-child{border-bottom:none;}
+.math-row.tot{border-top:1px solid rgba(255,255,255,.22);padding-top:13px;margin-top:4px;}
+.math-row .ml{color:rgba(255,255,255,.68);font-weight:300;}
+.math-row .mv{color:#fff;}
+.math-row.tot .ml{color:var(--sabbia);font-weight:600;font-size:.93rem;}
+.math-row.tot .mv{color:var(--sabbia);font-size:1.05rem;font-family:'Playfair Display',serif;font-weight:700;}
+.math-note{font-size:.77rem;color:rgba(255,255,255,.4);margin-top:12px;font-style:italic;line-height:1.5;}
+.risto-features{list-style:none;display:flex;flex-direction:column;}
+.risto-features li{display:flex;gap:13px;align-items:flex-start;padding:13px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:.91rem;color:var(--testo);line-height:1.5;}
+.risto-features li:last-child{border-bottom:none;}
+.risto-features li .ico{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
+.risto-features li strong{display:block;font-weight:600;}
+.risto-features li span{font-weight:300;color:var(--testo-m);font-size:.85rem;}
+.risto-r .btn-primary{background:#fff;color:var(--rosso);margin-top:30px;align-self:flex-start;}
+.risto-r .btn-primary:hover{background:var(--sabbia);}
+
+/* ZONA */
+.zona-sec{background:#fff;padding:96px;text-align:center;}
+.zona-sec .sec-title{margin:0 auto 16px;}
+.zona-sec .sec-lead{margin:0 auto 44px;max-width:520px;}
+.comuni{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;}
+.chip{background:var(--crema);border:1.5px solid var(--sabbia-s);border-radius:2px;padding:10px 20px;font-size:.84rem;font-weight:500;color:var(--testo);}
+.chip.now{background:var(--rosso);color:#fff;border-color:var(--rosso);}
+.zona-note{font-size:.82rem;color:var(--testo-m);font-style:italic;}
+
+/* FORM SECTION */
+.form-sec{background:linear-gradient(140deg,var(--scuro) 0%,#3d1e08 100%);padding:96px;position:relative;overflow:hidden;}
+.form-sec::before{content:'Saporì';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:16rem;font-weight:900;font-style:italic;color:rgba(255,255,255,.025);white-space:nowrap;pointer-events:none;}
+.form-sec .eyebrow{color:var(--sabbia);}
+.form-sec .eyebrow::before{background:var(--sabbia);}
+.form-sec .sec-title{color:#fff;}
+.form-sec .sec-title em{color:var(--arancio);}
+.form-sec .sec-lead{color:rgba(255,255,255,.5);max-width:480px;margin-bottom:52px;}
+.form-wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+
+/* form info left */
+.fi-item{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.fi-item:last-child{border-bottom:none;}
+.fi-item .fi-icon{font-size:1.5rem;flex-shrink:0;}
+.fi-item strong{display:block;font-size:.9rem;font-weight:600;color:#fff;margin-bottom:3px;}
+.fi-item span{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.5;font-weight:300;}
+
+/* form right panel */
+.form-panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:48px 44px;}
+
+/* role selector */
+.role-selector{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:32px;}
+.role-btn{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:rgba(255,255,255,.55);padding:18px 16px;text-align:center;cursor:pointer;transition:all .2s;border-radius:2px;}
+.role-btn .rb-icon{font-size:1.6rem;display:block;margin-bottom:6px;}
+.role-btn .rb-label{font-size:.83rem;font-weight:600;letter-spacing:.04em;}
+.role-btn .rb-sub{font-size:.71rem;opacity:.65;margin-top:3px;}
+.role-btn.active{background:rgba(200,52,26,.25);border-color:var(--rosso);color:#fff;}
+.role-btn:hover:not(.active){background:rgba(255,255,255,.1);}
+
+/* fields */
+.form-fields{display:flex;flex-direction:column;gap:16px;}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.field-row.full{grid-template-columns:1fr;}
+.fw{display:flex;flex-direction:column;gap:5px;}
+.fw label{font-size:.73rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.42);}
+.fw input,.fw select,.fw textarea{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#fff;padding:12px 14px;font-size:.9rem;border-radius:2px;font-family:'DM Sans',sans-serif;transition:border-color .2s;outline:none;width:100%;}
+.fw input::placeholder,.fw textarea::placeholder{color:rgba(255,255,255,.28);}
+.fw input:focus,.fw select:focus,.fw textarea:focus{border-color:var(--arancio);background:rgba(255,255,255,.1);}
+.fw select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='rgba(255,255,255,.38)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:35px;cursor:pointer;}
+.fw select option{background:#3d1e08;color:#fff;}
+.fw textarea{resize:vertical;min-height:96px;}
+
+/* check items */
+.check-group{display:flex;flex-direction:column;gap:6px;}
+.check-group > label{font-size:.73rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.42);}
+.check-items{display:flex;gap:8px;flex-wrap:wrap;}
+.check-item{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:2px;padding:8px 13px;cursor:pointer;transition:all .2s;user-select:none;}
+.check-item input[type="checkbox"]{display:none;}
+.check-item .ci-lbl{font-size:.82rem;color:rgba(255,255,255,.58);font-weight:500;}
+.check-item.checked{background:rgba(200,52,26,.22);border-color:var(--rosso);}
+.check-item.checked .ci-lbl{color:#fff;}
+
+/* conditional */
+.cond{display:none;}
+.cond.show{display:contents;}
+
+/* privacy */
+.priv-row{display:flex;align-items:flex-start;gap:10px;margin-top:4px;}
+.priv-row input[type="checkbox"]{margin-top:3px;flex-shrink:0;accent-color:var(--rosso);}
+.priv-row label{font-size:.77rem;color:rgba(255,255,255,.36);line-height:1.5;cursor:pointer;}
+.priv-row label a{color:rgba(255,255,255,.52);}
+
+.form-error{background:rgba(200,52,26,.2);border:1px solid rgba(200,52,26,.4);border-radius:3px;padding:11px 16px;font-size:.83rem;color:#ffbbaa;margin-top:4px;display:none;}
+
+.submit-btn{width:100%;background:var(--rosso);color:#fff;border:none;padding:16px 24px;font-size:.95rem;font-weight:600;border-radius:2px;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.01em;transition:all .25s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:9px;}
+.submit-btn:hover{background:var(--rosso-s);transform:translateY(-1px);}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+
+.form-success{display:none;text-align:center;padding:52px 32px;}
+.form-success .fs-icon{font-size:3.2rem;margin-bottom:16px;}
+.form-success h3{font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;margin-bottom:10px;}
+.form-success p{font-size:.92rem;color:rgba(255,255,255,.52);line-height:1.65;}
+
+/* FOOTER */
+footer{background:#0e0603;padding:34px 96px;display:flex;align-items:center;justify-content:space-between;}
+.foot-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;font-style:italic;color:var(--sabbia);}
+footer p{font-size:.74rem;color:rgba(255,255,255,.24);}
+.foot-links{display:flex;gap:22px;}
+.foot-links a{font-size:.74rem;color:rgba(255,255,255,.3);text-decoration:none;}
+.foot-links a:hover{color:var(--sabbia);}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:14px 22px;}
+  .nav-links{display:none;}
+  .hero{grid-template-columns:1fr;padding:96px 24px 64px;gap:36px;}
+  .hero-right{display:none;}
+  .stats-bar{grid-template-columns:repeat(2,1fr);}
+  .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.12);}
+  .how-sec,.steps-sec,.zona-sec{padding:64px 24px;}
+  .how-grid,.steps-grid{grid-template-columns:1fr;}
+  .tabs-header,.tab-nav,.tab-body{padding-left:24px;padding-right:24px;}
+  .tab-pane.active{grid-template-columns:1fr;}
+  .risto-sec{grid-template-columns:1fr;}
+  .risto-l,.risto-r{padding:64px 24px;}
+  .form-sec{padding:64px 24px;}
+  .form-wrap{grid-template-columns:1fr;}
+  .field-row{grid-template-columns:1fr;}
+  .form-panel{padding:32px 24px;}
+  .step-arr{display:none;}
+  footer{flex-direction:column;gap:14px;padding:26px 24px;text-align:center;}
+  .foot-links{justify-content:center;}
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#top" class="nav-logo">Sapor<span>ì</span></a>
+  <div class="nav-links">
+    <a href="#come-funziona">Come funziona</a>
+    <a href="#per-chi">Per gli hotel</a>
+    <a href="#ristoratori">Per i ristoranti</a>
+    <a href="#contatti" class="nav-cta" data-ph="nav_cta">Iscriviti</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="hero-left reveal">
+    <div class="hero-eyebrow">Bellaria-Igea Marina · Estate 2026</div>
+    <h1 class="hero-title">Il buon cibo<br><em>ti raggiunge</em><br>in vacanza.</h1>
+    <p class="hero-sub">Ordina colazione, pranzo e cena dai <strong>migliori ristoranti locali</strong> scelti dal tuo hotel. Menu dedicati, consegna in struttura, zero pensieri.</p>
+    <div class="hero-actions">
+      <a href="#come-funziona" class="btn-primary" data-ph="hero_cta_scopri">Scopri come funziona →</a>
+      <a href="#per-chi" class="btn-secondary" data-ph="hero_cta_hotel">Sei un albergatore?</a>
+    </div>
+    <div class="hero-pills">
+      <span class="hero-pill">☀️ Colazione</span>
+      <span class="hero-pill">🍝 Pranzo</span>
+      <span class="hero-pill">🦞 Cena</span>
+      <span class="hero-pill">🏨 Pensione completa</span>
+    </div>
+  </div>
+  <div class="hero-right reveal">
+    <div class="phone-wrap">
+      <span class="float-food ff1">🥐</span>
+      <span class="float-food ff2">🍋</span>
+      <span class="float-food ff3">🦞</span>
+      <span class="float-food ff4">🥗</span>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="ph-logo">Saporì</div>
+          <div class="ph-hotel">Menu Hotel Adriatico · Bellaria</div>
+          <div class="ph-section">☀️ Colazione — ordina entro 21:00</div>
+          <div class="ph-card">
+            <span class="ph-emoji">🥐</span>
+            <div><div class="ph-name">Cornetto + caffè</div><div class="ph-rest">Bar Roma · consegna 8:30</div></div>
+            <div class="ph-price">€5</div>
+          </div>
+          <div class="ph-section">🍝 Pranzo — ordina entro 11:30</div>
+          <div class="ph-card">
+            <span class="ph-emoji">🐟</span>
+            <div><div class="ph-name">Grigliata mista di pesce</div><div class="ph-rest">Osteria del Porto · 13:00</div></div>
+            <div class="ph-price">€22</div>
+          </div>
+          <div class="ph-card">
+            <span class="ph-emoji">🍝</span>
+            <div><div class="ph-name">Tagliatelle al ragù</div><div class="ph-rest">Da Nonna · 13:00</div></div>
+            <div class="ph-price">€14</div>
+          </div>
+          <div class="ph-cta">Ordina ora →</div>
+        </div>
+      </div>
+      <div class="ph-tag1">✓ Menu dedicato</div>
+      <div class="ph-tag2"><strong>Consegna in hotel</strong>Orario garantito</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar reveal">
+  <div class="stat-item"><div class="stat-num">€0</div><div class="stat-lbl">Costo per l'hotel</div></div>
+  <div class="stat-item"><div class="stat-num">3×</div><div class="stat-lbl">Pasti al giorno</div></div>
+  <div class="stat-item"><div class="stat-num">+20%</div><div class="stat-lbl">Solo sul venduto</div></div>
+  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Ristoranti locali</div></div>
+</div>
+
+<!-- COME FUNZIONA -->
+<section class="how-sec" id="come-funziona">
+  <div class="eyebrow reveal">Il servizio</div>
+  <h2 class="sec-title reveal">Semplice come<br><em>una passeggiata al mare.</em></h2>
+  <p class="sec-lead reveal" style="max-width:520px">Tre passi. Nessuna app da scaricare. Menu selezionato dal tuo hotel, consegna dal ristorante di fiducia dell'albergatore.</p>
+  <div class="how-grid">
+    <div class="how-card reveal" data-n="1">
+      <span class="icon">📱</span>
+      <h3>Scansiona il QR code</h3>
+      <p>Lo trovi in camera. Accedi al menu riservato al tuo hotel — ristoranti, bar e pasticcerie selezionati dall'albergatore, quelli di cui si fida.</p>
+    </div>
+    <div class="how-card reveal" data-n="2">
+      <span class="icon">🍽️</span>
+      <h3>Scegli e ordina</h3>
+      <p>Scegli i piatti dal menu dedicato. Colazione: ordina entro le 21:00 della sera prima. Paghi online, conferma immediata.</p>
+    </div>
+    <div class="how-card reveal" data-n="3">
+      <span class="icon">🛵</span>
+      <h3>Il ristorante consegna</h3>
+      <p>Il partner scelto dall'hotel consegna direttamente in struttura. Colazione 8:30, pranzo 12:30–13:30, cena 20:00–21:00.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TABS -->
+<section class="tabs-sec" id="per-chi">
+  <div class="tabs-header reveal">
+    <div class="eyebrow">Per chi è Saporì</div>
+    <h2 class="sec-title">Un servizio per <em>tutti.</em></h2>
+  </div>
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('ospiti',this)" data-ph="tab_ospiti">🏖️ Ospiti e turisti</button>
+    <button class="tab-btn" onclick="switchTab('hotel',this)" data-ph="tab_hotel">🏨 Albergatori</button>
+  </div>
+  <div class="tab-body">
+    <div class="tab-pane active" id="tab-ospiti">
+      <div class="pane-l reveal">
+        <h2>Vacanza vera.<br><em>Senza pensieri.</em></h2>
+        <p>Sei in hotel, fuori fa caldo, hai fame. Non hai voglia di cercare un ristorante. Con Saporì ordini dal telefono: arriva il cibo dai locali scelti dal tuo albergatore, quelli che conosce e di cui si fida.</p>
+        <ul class="benefit-list">
+          <li><span class="ck">✓</span>Menu dedicato al tuo hotel — non un catalogo anonimo</li>
+          <li><span class="ck">✓</span>Colazione, pranzo e cena: pensione completa senza cucina in hotel</li>
+          <li><span class="ck">✓</span>Ristoranti, bar e pasticcerie selezionati dall'albergatore</li>
+          <li><span class="ck">✓</span>Pagamento sicuro online — zero contante, zero code</li>
+          <li><span class="ck">✓</span>Qualità da ristorante, prezzi onesti</li>
+        </ul>
+        <a href="#contatti" class="btn-primary" data-ph="tab_cta_ospiti">Scopri il menu del tuo hotel →</a>
+      </div>
+      <div class="pane-r" data-icon="🌊">
+        <blockquote>"Finalmente una vacanza dove i pasti sono un piacere, non un problema da risolvere ogni giorno."</blockquote>
+        <cite>Ospite · Hotel 3 stelle · Bellaria</cite>
+        <div class="highlight-box">
+          <strong>8:30 · 13:00 · 20:30</strong>
+          <span>I tuoi tre momenti. Dove vuoi tu.</span>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane" id="tab-hotel">
+      <div class="pane-l reveal">
+        <h2>Pensione completa.<br><em>Senza assumere nessuno.</em></h2>
+        <p>Personale stagionale introvabile, cucina costosa, ospiti che chiedono dove mangiare. Saporì ti permette di offrire pensione completa scegliendo tu i ristoranti, bar e pasticcerie di fiducia — con menu settimanali dedicati al tuo hotel. Il delivery lo gestisce il ristorante partner.</p>
+        <ul class="benefit-list">
+          <li><span class="ck">✓</span>Zero costi — aderisci gratis, per sempre</li>
+          <li><span class="ck">✓</span>Scegli tu i partner: dalla rete Saporì o i tuoi contatti locali</li>
+          <li><span class="ck">✓</span>Menu settimanale dedicato al tuo hotel, concordato col ristorante</li>
+          <li><span class="ck">✓</span>Decidi quali pasti attivare — colazione, pranzo, cena o tutti e tre</li>
+          <li><span class="ck">✓</span>Un QR code in camera: il resto lo gestiscono ristorante e Saporì</li>
+          <li><span class="ck">✓</span>Ospiti soddisfatti, recensioni migliori, zero operatività in più</li>
+        </ul>
+        <a href="#contatti" class="btn-primary" style="background:var(--arancio)" data-ph="tab_cta_hotel">Aderire è gratuito — scrivici →</a>
+      </div>
+      <div class="pane-r" data-icon="🏨">
+        <blockquote>"I miei ospiti mi chiedevano sempre dove mangiare. Adesso trovano tutto in camera, con il menu che ho scelto io. E non mi costa niente."</blockquote>
+        <cite>Albergatore partner · Bellaria-Igea Marina</cite>
+        <div class="highlight-box">
+          <strong>€0</strong>
+          <span>Costo per l'hotel. Per sempre. Nessun vincolo.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="steps-sec reveal" id="ordina">
+  <div class="eyebrow">Come ordinare</div>
+  <h2 class="sec-title">Quattro passi.<br><em>Tutto il giorno con te.</em></h2>
+  <p class="sec-lead">Nessuna app da scaricare. Funziona su qualsiasi telefono. Colazione: ordina la sera prima entro le 21:00.</p>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-n">01</div>
+      <h3>Scansiona il QR</h3>
+      <p>In camera o in reception. Accedi al menu dedicato al tuo hotel.</p>
+      <span class="step-arr">→</span>
+    </div>
+    <div class="step-card">
+      <div class="step-n">02</div>
+      <h3>Scegli i piatti</h3>
+      <p>Menu settimanale concordato. Ristoranti scelti dall'albergatore. Allergeni indicati.</p>
+      <span class="step-arr">→</span>
+    </div>
+    <div class="step-card">
+      <div class="step-n">03</div>
+      <h3>Paga e conferma</h3>
+      <p>Carta, Satispay o Apple Pay. Conferma istantanea sul telefono.</p>
+      <span class="step-arr">→</span>
+    </div>
+    <div class="step-card">
+      <div class="step-n">04</div>
+      <h3>Ricevi e mangia</h3>
+      <p>Il ristorante partner consegna in hotel all'orario garantito.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RISTORATORI -->
+<section class="risto-sec" id="ristoratori">
+  <div class="risto-l reveal">
+    <div class="eyebrow">Per ristoratori, bar e pasticcerie</div>
+    <h2 class="sec-title">Diventa la cucina<br><em>dell'hotel.</em></h2>
+    <p class="sec-lead">L'albergatore ti sceglie come partner. Tu diventi il suo fornitore di pasti — l'hotel è il tuo canale di vendita diretto, con clienti già presenti e ordini programmati in anticipo.</p>
+    <ul class="risto-features">
+      <li><span class="ico">📋</span><div><strong>Ordini programmati in anticipo</strong><span>Ricevi l'elenco prima del servizio. Pianifichi senza sorprese.</span></div></li>
+      <li><span class="ico">🚫</span><div><strong>Zero costi di ingresso</strong><span>Nessuna fee, nessun abbonamento. Guadagni solo quando vendi.</span></div></li>
+      <li><span class="ico">📅</span><div><strong>Menu settimanale concordato</strong><span>Base fissa con l'albergatore. Nessun caos quotidiano nel piatto del giorno.</span></div></li>
+      <li><span class="ico">🕐</span><div><strong>Tu scegli le fasce orarie</strong><span>Decidi quali pasti coprire. Nessun impegno fuori dai tuoi orari.</span></div></li>
+      <li><span class="ico">📈</span><div><strong>Coperti aggiuntivi garantiti</strong><span>L'hotel è un canale di vendita fisso. Fatturato in più senza nuovo personale.</span></div></li>
+    </ul>
+    <a href="#contatti" class="btn-primary" style="margin-top:28px;display:inline-flex" data-ph="risto_cta">Diventa partner →</a>
+  </div>
+  <div class="risto-r reveal">
+    <div class="eyebrow">Il modello economico</div>
+    <h2 class="sec-title">Prezzi tuoi.<br><em>Più il 20%.</em></h2>
+    <p class="sec-lead">Il prezzo che l'ospite vede nell'app è il tuo listino maggiorato del 20%. Tu incassi il tuo prezzo pieno. Saporì trattiene la differenza per gestire piattaforma, ordini e coordinamento. Win–win.</p>
+    <div class="math-box">
+      <div class="math-row"><span class="ml">Tuo prezzo di listino</span><span class="mv">€ 35</span></div>
+      <div class="math-row"><span class="ml">Prezzo mostrato all'ospite (+20%)</span><span class="mv">€ 42</span></div>
+      <div class="math-row"><span class="ml">Logistica e coordinamento</span><span class="mv">a cura tua</span></div>
+      <div class="math-row tot"><span class="ml">Incassi tu</span><span class="mv">€ 35</span></div>
+    </div>
+    <div class="math-note">Su 15 ordini/giorno: +€525 di fatturato aggiuntivo al tuo listino, su clienti che non avresti mai avuto.</div>
+    <a href="#contatti" class="btn-primary" style="margin-top:26px;display:inline-flex" data-ph="risto_cta_math">Parliamoci →</a>
+  </div>
+</section>
+
+<!-- ZONA -->
+<section class="zona-sec reveal">
+  <div class="eyebrow center">Dove operiamo</div>
+  <h2 class="sec-title">Bellaria-Igea Marina.<br><em>Estate 2026.</em></h2>
+  <p class="sec-lead">Lanciamo a Bellaria-Igea Marina nell'estate 2026. I posti per hotel e ristoranti partner sono limitati — la lista d'attesa è aperta adesso.</p>
+  <div class="comuni">
+    <div class="chip now">📍 Bellaria-Igea Marina · 2026</div>
+    <div class="chip">Rimini · 2027</div>
+    <div class="chip">Riccione · 2027</div>
+    <div class="chip">Cattolica · 2027</div>
+    <div class="chip">Cesenatico · 2027</div>
+    <div class="chip">Cervia · 2027</div>
+  </div>
+  <p class="zona-note">Sei in uno dei comuni 2027? <a href="#contatti" style="color:var(--rosso)">Iscriviti in lista d'attesa →</a></p>
+</section>
+
+<!-- FORM -->
+<section class="form-sec" id="contatti">
+  <div class="eyebrow reveal">Prenota il tuo posto</div>
+  <h2 class="sec-title reveal">Sei pronto per<br><em>l'estate 2026?</em></h2>
+  <p class="sec-lead reveal">I partner per la stagione 2026 saranno selezionati nelle prossime settimane. Compila il modulo: ti ricontattiamo entro 48 ore.</p>
+
+  <div class="form-wrap">
+    <!-- LEFT INFO -->
+    <div class="reveal">
+      <div class="fi-item">
+        <span class="fi-icon">⚡</span>
+        <div><strong>Risposta entro 48 ore</strong><span>Valutiamo ogni richiesta e ti ricontattiamo personalmente per esplorare la collaborazione.</span></div>
+      </div>
+      <div class="fi-item">
+        <span class="fi-icon">🔒</span>
+        <div><strong>Nessun impegno</strong><span>L'iscrizione non è vincolante. Esploriamo insieme se Saporì fa per te.</span></div>
+      </div>
+      <div class="fi-item">
+        <span class="fi-icon">🏨</span>
+        <div><strong>Per albergatori</strong><span>Zero costi. Scegli i ristoranti partner, i pasti da attivare, il menu da offrire ai tuoi ospiti.</span></div>
+      </div>
+      <div class="fi-item">
+        <span class="fi-icon">🍽️</span>
+        <div><strong>Per ristoranti, bar e pasticcerie</strong><span>Ordini garantiti e programmati, menu concordato, zero costi di ingresso.</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT FORM -->
+    <div class="form-panel reveal" id="form-container">
+      <!-- role -->
+      <div class="role-selector" id="role-selector">
+        <div class="role-btn active" id="role-alb" onclick="selectRole('albergatore')">
+          <span class="rb-icon">🏨</span>
+          <span class="rb-label">Albergatore</span>
+          <div class="rb-sub">Hotel, B&B, pensione</div>
+        </div>
+        <div class="role-btn" id="role-ris" onclick="selectRole('ristoratore')">
+          <span class="rb-icon">🍽️</span>
+          <span class="rb-label">Ristoratore</span>
+          <div class="rb-sub">Ristorante, bar, pasticceria</div>
+        </div>
+      </div>
+
+      <div class="form-fields" id="form-fields">
+        <!-- comuni -->
+        <div class="field-row">
+          <div class="fw">
+            <label>Nome e cognome *</label>
+            <input type="text" id="f-nome" placeholder="Mario Rossi">
+          </div>
+          <div class="fw">
+            <label>Telefono</label>
+            <input type="tel" id="f-tel" placeholder="+39 333 000 0000">
+          </div>
+        </div>
+        <div class="field-row full">
+          <div class="fw">
+            <label>Email *</label>
+            <input type="email" id="f-email" placeholder="mario@esempio.it">
+          </div>
+        </div>
+
+        <!-- albergatore -->
+        <div class="cond show" id="cond-alb">
+          <div class="field-row">
+            <div class="fw">
+              <label>Nome della struttura *</label>
+              <input type="text" id="f-struttura" placeholder="Hotel Adriatico">
+            </div>
+            <div class="fw">
+              <label>N° camere</label>
+              <select id="f-camere">
+                <option value="">Seleziona</option>
+                <option>Meno di 10</option>
+                <option>10–20</option>
+                <option>21–40</option>
+                <option>41–60</option>
+                <option>Oltre 60</option>
+              </select>
+            </div>
+          </div>
+          <div class="check-group">
+            <label>Pasti di interesse</label>
+            <div class="check-items">
+              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">☀️ Colazione</span></div>
+              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">🍝 Pranzo</span></div>
+              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">🦞 Cena</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ristoratore -->
+        <div class="cond" id="cond-ris">
+          <div class="field-row">
+            <div class="fw">
+              <label>Nome del locale *</label>
+              <input type="text" id="f-locale" placeholder="Osteria del Porto">
+            </div>
+            <div class="fw">
+              <label>Tipo di locale</label>
+              <select id="f-tipo">
+                <option value="">Seleziona</option>
+                <option>Ristorante</option>
+                <option>Trattoria / Osteria</option>
+                <option>Bar / Caffetteria</option>
+                <option>Pasticceria</option>
+                <option>Rosticceria</option>
+                <option>Altro</option>
+              </select>
+            </div>
+          </div>
+          <div class="field-row full">
+            <div class="fw">
+              <label>Coperti medi al giorno</label>
+              <select id="f-coperti">
+                <option value="">Seleziona</option>
+                <option>Meno di 30</option>
+                <option>30–60</option>
+                <option>61–100</option>
+                <option>Oltre 100</option>
+              </select>
+            </div>
+          </div>
+          <div class="check-group">
+            <label>Fasce orarie disponibili</label>
+            <div class="check-items">
+              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">☀️ Colazione</span></div>
+              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">🍝 Pranzo</span></div>
+              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">🦞 Cena</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- messaggio -->
+        <div class="field-row full">
+          <div class="fw">
+            <label>Domande o note</label>
+            <textarea id="f-msg" placeholder="Scrivi qui qualsiasi domanda o informazione utile..."></textarea>
+          </div>
+        </div>
+
+        <!-- privacy -->
+        <div class="priv-row">
+          <input type="checkbox" id="f-privacy">
+          <label for="f-privacy">Acconsento al trattamento dei dati personali ai sensi dell'art. 13 GDPR. I dati saranno utilizzati esclusivamente per contattarti riguardo a Saporì. <a href="#">Privacy policy</a>.</label>
+        </div>
+
+        <div class="form-error" id="form-error"></div>
+
+        <button class="submit-btn" id="submit-btn" onclick="submitForm()">
+          <span id="btn-text">Invia richiesta</span>
+          <span id="btn-arr">→</span>
+        </button>
+      </div>
+
+      <!-- success -->
+      <div class="form-success" id="form-success">
+        <div class="fs-icon">🎉</div>
+        <h3>Richiesta inviata!</h3>
+        <p>Ti ricontattiamo entro 48 ore per esplorare insieme la collaborazione.<br>Grazie per l'interesse in Saporì.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">Saporì</div>
+  <p>© 2026 Saporì · Bellaria-Igea Marina</p>
+  <div class="foot-links">
+    <a href="#">Privacy policy</a>
+    <a href="#">Cookie</a>
+    <a href="mailto:info@sapori.app">info@sapori.app</a>
+  </div>
+</footer>
+
+<script>
+// ─────────────────────────────────────────────────────────────────
+// EMAILJS — istruzioni configurazione:
+//
+// 1. Vai su emailjs.com → Sign Up (gratuito, 200 email/mese)
+// 2. "Add New Service" → Gmail → autorizza con alessandropracucci@gmail.com
+//    Copia il SERVICE ID (es. service_abc123)
+// 3. "Email Templates" → Create New Template
+//    Subject: Nuova richiesta Saporì — {{role}} — {{nome}}
+//    Body (testo):
+//      Tipo: {{role}}
+//      Nome: {{nome}}
+//      Email: {{email}}
+//      Telefono: {{tel}}
+//      Struttura/Locale: {{struttura}}
+//      Dettagli: {{dettagli}}
+//      Pasti: {{pasti}}
+//      Messaggio: {{messaggio}}
+//    To Email: alessandropracucci@gmail.com
+//    Copia il TEMPLATE ID (es. template_xyz789)
+// 4. "Account" → "Public Key" → copiala
+// 5. Sostituisci i tre valori qui sotto:
+// ─────────────────────────────────────────────────────────────────
+const EJS_KEY      = 'YOUR_PUBLIC_KEY';    // es. 'AbCdEfGhIjKlMnOp'
+const EJS_SERVICE  = 'YOUR_SERVICE_ID';   // es. 'service_abc123'
+const EJS_TEMPLATE = 'YOUR_TEMPLATE_ID';  // es. 'template_xyz789'
+
+emailjs.init(EJS_KEY);
+
+let currentRole = 'albergatore';
+
+function selectRole(role) {
+  currentRole = role;
+  document.getElementById('role-alb').classList.toggle('active', role === 'albergatore');
+  document.getElementById('role-ris').classList.toggle('active', role === 'ristoratore');
+  document.getElementById('cond-alb').classList.toggle('show', role === 'albergatore');
+  document.getElementById('cond-ris').classList.toggle('show', role === 'ristoratore');
+  track('form_role_selected', { role });
+}
+
+function toggleCheck(el) {
+  el.classList.toggle('checked');
+}
+
+async function submitForm() {
+  const nome    = document.getElementById('f-nome').value.trim();
+  const email   = document.getElementById('f-email').value.trim();
+  const privacy = document.getElementById('f-privacy').checked;
+  const errEl   = document.getElementById('form-error');
+  errEl.style.display = 'none';
+
+  if (!nome)   { showErr('Inserisci il tuo nome e cognome.'); return; }
+  if (!email || !email.includes('@')) { showErr('Inserisci un indirizzo email valido.'); return; }
+  if (!privacy) { showErr('Accetta la privacy policy per procedere.'); return; }
+
+  const tel = document.getElementById('f-tel').value.trim();
+  const msg = document.getElementById('f-msg').value.trim();
+  let struttura = '', dettagli = '', pasti = '';
+
+  if (currentRole === 'albergatore') {
+    struttura = document.getElementById('f-struttura').value.trim();
+    dettagli  = document.getElementById('f-camere').value + ' camere';
+    pasti     = getChecked('#cond-alb');
+    if (!struttura) { showErr('Inserisci il nome della struttura.'); return; }
+  } else {
+    struttura = document.getElementById('f-locale').value.trim();
+    dettagli  = document.getElementById('f-tipo').value + ' · ' + document.getElementById('f-coperti').value + ' coperti/gg';
+    pasti     = getChecked('#cond-ris');
+    if (!struttura) { showErr('Inserisci il nome del locale.'); return; }
+  }
+
+  const btn = document.getElementById('submit-btn');
+  document.getElementById('btn-text').textContent = 'Invio in corso…';
+  document.getElementById('btn-arr').textContent  = '';
+  btn.disabled = true;
+
+  try {
+    await emailjs.send(EJS_SERVICE, EJS_TEMPLATE, {
+      role: currentRole === 'albergatore' ? '🏨 Albergatore' : '🍽️ Ristoratore',
+      nome, email, tel: tel || '—',
+      struttura: struttura || '—',
+      dettagli:  dettagli  || '—',
+      pasti:     pasti     || '—',
+      messaggio: msg       || '—'
+    });
+    document.getElementById('form-fields').style.display = 'none';
+    document.getElementById('role-selector').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    track('form_submitted', { role: currentRole });
+  } catch(e) {
+    showErr('Errore nell\'invio. Riprova o scrivici a info@sapori.app');
+    document.getElementById('btn-text').textContent = 'Invia richiesta';
+    document.getElementById('btn-arr').textContent  = '→';
+    btn.disabled = false;
+    console.error(e);
+  }
+}
+
+function getChecked(scope) {
+  return [...document.querySelectorAll(scope + ' .check-item.checked .ci-lbl')]
+    .map(el => el.textContent).join(', ') || '—';
+}
+
+function showErr(msg) {
+  const el = document.getElementById('form-error');
+  el.textContent = msg; el.style.display = 'block';
+}
+
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  track('tab_switched', { tab: id });
+}
+
+// Analytics
+function track(name, props) {
+  if (typeof gtag     !== 'undefined') gtag('event', name, props);
+  if (typeof posthog  !== 'undefined') posthog.capture(name, props);
+}
+document.querySelectorAll('[data-ph]').forEach(el => {
+  el.addEventListener('click', () => track('cta_click', { id: el.dataset.ph }));
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('vis'), i * 60);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.boxShadow =
+    window.scrollY > 30 ? '0 2px 18px rgba(0,0,0,.07)' : 'none';
+});
+</script>
+</body>
+</html>
