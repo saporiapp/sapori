@@ -3,316 +3,501 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Saporì — Il buon cibo ti raggiunge in vacanza</title>
+<title>Saporì — La cucina esternalizzata del tuo hotel</title>
 <meta name="description" content="Saporì porta colazione, pranzo e cena dai migliori ristoranti locali direttamente agli ospiti del tuo hotel. Zero costi per l'hotel, zero burocrazia per il ristorante.">
+
+<!-- Open Graph / WhatsApp preview -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sapori.app/">
+<meta property="og:title" content="Saporì — La cucina esternalizzata del tuo hotel">
+<meta property="og:description" content="Colazione, pranzo e cena dai migliori ristoranti locali direttamente agli ospiti. Zero costi per l'hotel. Bellaria-Igea Marina · Estate 2026.">
+<meta property="og:image" content="https://sapori.app/og-image.jpg">
+<meta property="twitter:card" content="summary_large_image">
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-
-<!-- Google Analytics 4 — sostituisci G-XXXXXXXXXX con il tuo Measurement ID -->
+<!-- Google Analytics 4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+window.dataLayer=window.dataLayer||[];
+function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());
+gtag('config','G-XXXXXXXXXX');
 </script>
 
-<!-- PostHog — sostituisci YOUR_POSTHOG_KEY con la tua chiave -->
+<!-- PostHog — sostituisci YOUR_POSTHOG_KEY con la tua chiave EU -->
 <script>
-  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]);t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[],e[a]=[],a="init";u.length;){var d=u.shift();g(u,d)}g(e,"init"),g(e,"capture"),g(e,"reset"),g(e,"identify"),g(e,"set_config")}(p,r),e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||(window.posthog=[]));
-  posthog.init('YOUR_POSTHOG_KEY',{api_host:'https://eu.i.posthog.com'});
+(function(){
+  var s=document.createElement('script');
+  s.src='https://eu-assets.i.posthog.com/static/array.js';
+  s.async=true;
+  s.onload=function(){
+    window.posthog&&window.posthog.init('YOUR_POSTHOG_KEY',{api_host:'https://eu.i.posthog.com'});
+  };
+  document.head.appendChild(s);
+})();
 </script>
 
 <style>
-:root {
-  --rosso:   #C8341A;
-  --rosso-s: #9E2412;
-  --arancio: #E8831A;
-  --sabbia:  #F5E6C8;
-  --sabbia-s:#EDD9A3;
-  --crema:   #FDF6E9;
-  --terra:   #7A3B1E;
-  --bianco:  #FFFDF7;
-  --testo:   #2A1A0E;
-  --testo-m: #6B4423;
-  --scuro:   #1C0E05;
+:root{
+  --rosso:#C8341A;--rosso-s:#9E2412;--arancio:#E8831A;
+  --sabbia:#F5E6C8;--sabbia-s:#EDD9A3;--crema:#FDF6E9;
+  --terra:#7A3B1E;--bianco:#FFFDF7;--testo:#2A1A0E;
+  --testo-m:#6B4423;--scuro:#1C0E05;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'DM Sans',sans-serif;background:var(--bianco);color:var(--testo);overflow-x:hidden;}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 64px;background:rgba(255,253,247,.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,52,26,.12);transition:box-shadow .3s;}
-.nav-logo{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;font-style:italic;color:var(--rosso);text-decoration:none;}
-.nav-logo span{color:var(--arancio);}
-.nav-links{display:flex;gap:36px;align-items:center;}
-.nav-links a{font-size:.85rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--testo-m);text-decoration:none;transition:color .2s;}
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:16px 64px;background:rgba(255,253,247,.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,52,26,.1);transition:box-shadow .3s;}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;font-style:italic;color:var(--rosso);text-decoration:none;}
+.logo-i{color:var(--arancio);}
+
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-size:.82rem;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--testo-m);text-decoration:none;transition:color .2s;}
 .nav-links a:hover{color:var(--rosso);}
-.nav-cta{background:var(--rosso)!important;color:#fff!important;padding:10px 26px;border-radius:2px;}
+.nav-cta{background:var(--rosso)!important;color:#fff!important;padding:9px 24px;border-radius:2px;}
 .nav-cta:hover{background:var(--rosso-s)!important;}
 
-/* UTILS */
-.eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--rosso);display:flex;align-items:center;gap:10px;margin-bottom:16px;}
-.eyebrow::before{content:'';display:block;width:28px;height:2px;background:var(--rosso);flex-shrink:0;}
+/* ── UTILS ── */
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--rosso);display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.eyebrow::before{content:'';display:block;width:26px;height:2px;background:var(--rosso);flex-shrink:0;}
 .eyebrow.center{justify-content:center;}
-.eyebrow.center::before{display:none;}
-.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);line-height:1.08;font-weight:900;margin-bottom:18px;color:var(--testo);}
+.eyebrow.center::before,.eyebrow.light::before{background:rgba(255,255,255,.4);}
+.eyebrow.light{color:rgba(255,255,255,.6);}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,3.2vw,2.9rem);line-height:1.08;font-weight:900;margin-bottom:16px;color:var(--testo);}
 .sec-title em{font-style:italic;color:var(--rosso);}
-.sec-lead{font-size:1.02rem;line-height:1.78;color:var(--testo-m);font-weight:300;}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--rosso);color:#fff;padding:14px 30px;font-size:.93rem;font-weight:600;border:none;border-radius:2px;cursor:pointer;text-decoration:none;transition:all .25s;letter-spacing:.01em;font-family:'DM Sans',sans-serif;}
-.btn-primary:hover{background:var(--rosso-s);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,52,26,.28);}
-.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--testo);padding:14px 30px;font-size:.93rem;font-weight:500;border:1.5px solid var(--sabbia-s);border-radius:2px;cursor:pointer;text-decoration:none;transition:all .25s;font-family:'DM Sans',sans-serif;}
-.btn-secondary:hover{border-color:var(--rosso);color:var(--rosso);}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease;}
+.sec-title.white{color:#fff;}
+.sec-title.white em{color:var(--arancio);}
+.sec-lead{font-size:1rem;line-height:1.76;color:var(--testo-m);font-weight:300;}
+.sec-lead.dim{color:rgba(255,255,255,.5);}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;font-size:.9rem;font-weight:600;border:none;border-radius:2px;cursor:pointer;text-decoration:none;transition:all .25s;font-family:'DM Sans',sans-serif;letter-spacing:.01em;}
+.btn-red{background:var(--rosso);color:#fff;}
+.btn-red:hover{background:var(--rosso-s);transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,52,26,.28);}
+.btn-orange{background:var(--arancio);color:#fff;}
+.btn-orange:hover{background:#d4730f;transform:translateY(-2px);}
+.btn-white{background:#fff;color:var(--rosso);}
+.btn-white:hover{background:var(--sabbia);}
+.btn-outline{background:transparent;color:var(--testo);border:1.5px solid var(--sabbia-s);}
+.btn-outline:hover{border-color:var(--rosso);color:var(--rosso);}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease;}
 .reveal.vis{opacity:1;transform:translateY(0);}
 
-/* HERO */
-.hero{min-height:100vh;background:linear-gradient(148deg,var(--sabbia) 0%,var(--crema) 52%,#fff8ee 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 96px 90px;position:relative;overflow:hidden;gap:60px;}
-.hero-glow{position:absolute;right:-100px;top:45%;transform:translateY(-50%);width:650px;height:650px;border-radius:50%;background:radial-gradient(circle,rgba(232,131,26,.15) 0%,transparent 68%);pointer-events:none;}
-.hero-left{position:relative;z-index:1;}
-.hero-eyebrow{font-size:.75rem;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--rosso);display:flex;align-items:center;gap:10px;margin-bottom:22px;}
-.hero-eyebrow::before{content:'';display:block;width:32px;height:2px;background:var(--rosso);}
-.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3.2rem,4.8vw,5.2rem);line-height:.95;font-weight:900;color:var(--testo);margin-bottom:10px;letter-spacing:-.025em;}
-.hero-title em{font-style:italic;color:var(--rosso);display:block;}
-.hero-sub{font-size:1.12rem;line-height:1.72;color:var(--testo-m);max-width:470px;margin:16px 0 42px;font-weight:300;}
-.hero-sub strong{color:var(--testo);font-weight:600;}
-.hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
-.hero-pills{display:flex;gap:9px;flex-wrap:wrap;margin-top:30px;}
-.hero-pill{background:rgba(200,52,26,.07);border:1px solid rgba(200,52,26,.18);color:var(--rosso);padding:6px 15px;border-radius:100px;font-size:.8rem;font-weight:500;}
+/* SVG ICONS */
+.icon-svg{display:inline-block;flex-shrink:0;}
 
-/* phone mockup */
-.hero-right{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;}
-.phone-wrap{position:relative;}
-.phone-frame{width:255px;height:455px;background:#1a0c04;border-radius:34px;box-shadow:0 40px 80px rgba(0,0,0,.22),0 0 0 7px #2e1c0c;overflow:hidden;position:relative;z-index:2;}
-.phone-screen{width:100%;height:100%;background:linear-gradient(180deg,var(--sabbia) 0%,var(--crema) 100%);padding:22px 12px 16px;display:flex;flex-direction:column;gap:7px;}
-.ph-logo{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;font-style:italic;color:var(--rosso);text-align:center;}
-.ph-hotel{font-size:.49rem;color:var(--testo-m);text-align:center;margin-bottom:4px;letter-spacing:.07em;text-transform:uppercase;}
-.ph-section{font-size:.54rem;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.08em;margin-top:3px;}
-.ph-card{background:#fff;border-radius:7px;padding:7px 9px;box-shadow:0 2px 6px rgba(0,0,0,.07);display:flex;align-items:center;gap:7px;}
-.ph-emoji{font-size:1.3rem;}
-.ph-name{font-size:.56rem;font-weight:600;color:var(--testo);}
-.ph-rest{font-size:.47rem;color:var(--testo-m);margin-top:1px;}
-.ph-price{font-size:.62rem;font-weight:700;color:var(--rosso);margin-left:auto;white-space:nowrap;}
-.ph-cta{background:var(--rosso);color:#fff;border-radius:5px;padding:7px;text-align:center;font-size:.55rem;font-weight:600;letter-spacing:.04em;margin-top:2px;}
-.ph-tag1{position:absolute;right:-16px;top:68px;z-index:3;background:#3D6B2C;color:#fff;padding:5px 11px;border-radius:20px;font-size:.57rem;font-weight:600;box-shadow:0 4px 12px rgba(61,107,44,.3);white-space:nowrap;}
-.ph-tag2{position:absolute;left:-28px;bottom:100px;z-index:3;background:#fff;color:var(--testo);padding:8px 11px;border-radius:9px;font-size:.55rem;font-weight:500;box-shadow:0 6px 20px rgba(0,0,0,.12);border:1px solid var(--sabbia-s);white-space:nowrap;}
-.ph-tag2 strong{display:block;font-size:.66rem;color:var(--rosso);font-weight:700;}
-.float-food{position:absolute;font-size:1.9rem;animation:floatY 3s ease-in-out infinite;pointer-events:none;}
-.ff1{top:18px;left:8px;animation-delay:0s;}
-.ff2{top:48px;right:-2px;animation-delay:.9s;font-size:1.5rem;}
-.ff3{bottom:65px;right:-4px;animation-delay:1.8s;}
-.ff4{bottom:28px;left:4px;animation-delay:.4s;font-size:1.4rem;}
-@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+/* ── GDPR BANNER ── */
+#gdpr{position:fixed;bottom:0;left:0;right:0;z-index:300;background:var(--scuro);border-top:2px solid rgba(200,52,26,.4);padding:16px 48px;display:flex;align-items:center;justify-content:space-between;gap:20px;transform:translateY(100%);transition:transform .4s ease;}
+#gdpr.show{transform:translateY(0);}
+#gdpr p{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.5;max-width:700px;}
+#gdpr a{color:rgba(255,255,255,.7);text-decoration:underline;}
+.gdpr-btns{display:flex;gap:10px;flex-shrink:0;}
+.gdpr-btn{padding:9px 20px;border-radius:2px;font-size:.8rem;font-weight:600;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;}
+.gdpr-accept{background:var(--rosso);color:#fff;}
+.gdpr-reject{background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);}
 
-/* STATS */
-.stats-bar{background:var(--rosso);display:grid;grid-template-columns:repeat(4,1fr);}
-.stat-item{text-align:center;color:#fff;padding:30px 20px;border-right:1px solid rgba(255,255,255,.16);}
-.stat-item:last-child{border-right:none;}
-.stat-num{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:900;line-height:1;margin-bottom:5px;}
-.stat-lbl{font-size:.75rem;opacity:.8;letter-spacing:.07em;text-transform:uppercase;}
+/* ── MODAL FORM ── */
+#modal-overlay{position:fixed;inset:0;z-index:400;background:rgba(28,14,5,.7);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px;}
+#modal-overlay.open{display:flex;}
+.modal{background:var(--crema);border-radius:4px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto;position:relative;}
+.modal-head{background:var(--rosso);padding:28px 32px 22px;position:relative;}
+.modal-head h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:#fff;margin-bottom:4px;}
+.modal-head p{font-size:.83rem;color:rgba(255,255,255,.65);}
+.modal-close{position:absolute;top:18px;right:20px;background:rgba(255,255,255,.15);border:none;color:#fff;width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.modal-close:hover{background:rgba(255,255,255,.25);}
+.modal-body{padding:28px 32px 32px;}
 
-/* COME FUNZIONA */
-.how-sec{background:var(--crema);padding:96px;}
-.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:52px;}
-.how-card{background:#fff;padding:42px 30px;position:relative;overflow:hidden;transition:transform .3s;}
-.how-card:hover{transform:translateY(-4px);}
-.how-card::before{content:attr(data-n);position:absolute;top:-18px;right:14px;font-family:'Playfair Display',serif;font-size:7rem;font-weight:900;color:var(--sabbia);line-height:1;pointer-events:none;}
-.how-card .icon{font-size:2.1rem;margin-bottom:16px;display:block;}
-.how-card h3{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;margin-bottom:9px;color:var(--testo);}
-.how-card p{font-size:.9rem;line-height:1.68;color:var(--testo-m);font-weight:300;}
+/* role pills */
+.role-pills{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:24px;}
+.rp{background:var(--sabbia);border:1.5px solid var(--sabbia-s);padding:14px 12px;text-align:center;cursor:pointer;transition:all .2s;border-radius:2px;}
+.rp.active{background:var(--rosso);border-color:var(--rosso);color:#fff;}
+.rp .rp-icon{font-size:1.4rem;display:block;margin-bottom:4px;}
+.rp .rp-label{font-size:.8rem;font-weight:600;color:inherit;}
+.rp .rp-sub{font-size:.68rem;color:var(--testo-m);margin-top:2px;}
+.rp.active .rp-sub{color:rgba(255,255,255,.7);}
 
-/* TABS */
-.tabs-sec{background:var(--bianco);padding:96px 0;}
-.tabs-header{padding:0 96px;}
-.tab-nav{display:flex;border-bottom:2px solid var(--sabbia-s);margin:40px 96px 0;}
-.tab-btn{padding:13px 34px;font-size:.9rem;font-weight:500;border:none;background:transparent;cursor:pointer;color:var(--testo-m);border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;font-family:'DM Sans',sans-serif;}
-.tab-btn.active{color:var(--rosso);border-bottom-color:var(--rosso);font-weight:600;}
-.tab-body{padding:52px 96px;}
-.tab-pane{display:none;}
-.tab-pane.active{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;}
-.pane-l h2{font-family:'Playfair Display',serif;font-size:2.1rem;font-weight:800;line-height:1.18;margin-bottom:14px;color:var(--testo);}
-.pane-l h2 em{font-style:italic;color:var(--rosso);}
-.pane-l p{font-size:.96rem;line-height:1.74;color:var(--testo-m);margin-bottom:28px;font-weight:300;}
-.benefit-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:34px;}
-.benefit-list li{display:flex;align-items:flex-start;gap:11px;font-size:.91rem;color:var(--testo);line-height:1.52;}
-.benefit-list li .ck{flex-shrink:0;width:19px;height:19px;background:var(--rosso);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.58rem;font-weight:700;margin-top:2px;}
-.pane-r{background:linear-gradient(135deg,var(--sabbia) 0%,var(--sabbia-s) 100%);border-radius:4px;padding:42px;position:relative;overflow:hidden;}
-.pane-r::after{content:attr(data-icon);position:absolute;bottom:-22px;right:-8px;font-size:8rem;opacity:.09;pointer-events:none;}
-.pane-r blockquote{font-family:'Playfair Display',serif;font-size:1.2rem;line-height:1.58;color:var(--terra);font-style:italic;margin-bottom:18px;}
-.pane-r cite{font-size:.77rem;color:var(--testo-m);font-style:normal;font-weight:500;letter-spacing:.04em;text-transform:uppercase;}
-.highlight-box{background:#fff;border-radius:4px;padding:16px 20px;margin-top:20px;border-left:3px solid var(--rosso);}
-.highlight-box strong{display:block;font-size:1.45rem;color:var(--rosso);font-family:'Playfair Display',serif;}
-.highlight-box span{font-size:.8rem;color:var(--testo-m);}
-
-/* STEPS */
-.steps-sec{background:var(--scuro);padding:96px;}
-.steps-sec .eyebrow{color:var(--sabbia);}
-.steps-sec .eyebrow::before{background:var(--sabbia);}
-.steps-sec .sec-title{color:#fff;}
-.steps-sec .sec-title em{color:var(--arancio);}
-.steps-sec .sec-lead{color:rgba(255,255,255,.5);max-width:520px;}
-.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:52px;}
-.step-card{background:rgba(255,255,255,.05);padding:34px 22px;border:1px solid rgba(255,255,255,.07);position:relative;transition:background .3s;}
-.step-card:hover{background:rgba(255,255,255,.09);}
-.step-n{font-family:'Playfair Display',serif;font-size:2.7rem;font-weight:900;color:var(--rosso);line-height:1;margin-bottom:13px;}
-.step-card h3{font-size:.96rem;font-weight:600;color:#fff;margin-bottom:7px;}
-.step-card p{font-size:.84rem;line-height:1.62;color:rgba(255,255,255,.48);font-weight:300;}
-.step-arr{position:absolute;right:-11px;top:50%;transform:translateY(-50%);color:var(--arancio);font-size:1.1rem;z-index:2;}
-.step-card:last-child .step-arr{display:none;}
-
-/* RISTORATORI */
-.risto-sec{display:grid;grid-template-columns:1fr 1fr;}
-.risto-l{padding:96px 80px;background:var(--sabbia);}
-.risto-r{padding:96px 80px;background:var(--rosso);color:#fff;display:flex;flex-direction:column;justify-content:center;}
-.risto-r .eyebrow{color:rgba(255,255,255,.6);}
-.risto-r .eyebrow::before{background:rgba(255,255,255,.35);}
-.risto-r .sec-title{color:#fff;}
-.risto-r .sec-lead{color:rgba(255,255,255,.7);max-width:420px;}
-.math-box{background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.18);border-radius:4px;padding:24px 28px;margin-top:26px;}
-.math-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.09);font-size:.87rem;}
-.math-row:last-child{border-bottom:none;}
-.math-row.tot{border-top:1px solid rgba(255,255,255,.22);padding-top:13px;margin-top:4px;}
-.math-row .ml{color:rgba(255,255,255,.68);font-weight:300;}
-.math-row .mv{color:#fff;}
-.math-row.tot .ml{color:var(--sabbia);font-weight:600;font-size:.93rem;}
-.math-row.tot .mv{color:var(--sabbia);font-size:1.05rem;font-family:'Playfair Display',serif;font-weight:700;}
-.math-note{font-size:.77rem;color:rgba(255,255,255,.4);margin-top:12px;font-style:italic;line-height:1.5;}
-.risto-features{list-style:none;display:flex;flex-direction:column;}
-.risto-features li{display:flex;gap:13px;align-items:flex-start;padding:13px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:.91rem;color:var(--testo);line-height:1.5;}
-.risto-features li:last-child{border-bottom:none;}
-.risto-features li .ico{font-size:1.3rem;flex-shrink:0;margin-top:1px;}
-.risto-features li strong{display:block;font-weight:600;}
-.risto-features li span{font-weight:300;color:var(--testo-m);font-size:.85rem;}
-.risto-r .btn-primary{background:#fff;color:var(--rosso);margin-top:30px;align-self:flex-start;}
-.risto-r .btn-primary:hover{background:var(--sabbia);}
-
-/* ZONA */
-.zona-sec{background:#fff;padding:96px;text-align:center;}
-.zona-sec .sec-title{margin:0 auto 16px;}
-.zona-sec .sec-lead{margin:0 auto 44px;max-width:520px;}
-.comuni{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;}
-.chip{background:var(--crema);border:1.5px solid var(--sabbia-s);border-radius:2px;padding:10px 20px;font-size:.84rem;font-weight:500;color:var(--testo);}
-.chip.now{background:var(--rosso);color:#fff;border-color:var(--rosso);}
-.zona-note{font-size:.82rem;color:var(--testo-m);font-style:italic;}
-
-/* FORM SECTION */
-.form-sec{background:linear-gradient(140deg,var(--scuro) 0%,#3d1e08 100%);padding:96px;position:relative;overflow:hidden;}
-.form-sec::before{content:'Saporì';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:16rem;font-weight:900;font-style:italic;color:rgba(255,255,255,.025);white-space:nowrap;pointer-events:none;}
-.form-sec .eyebrow{color:var(--sabbia);}
-.form-sec .eyebrow::before{background:var(--sabbia);}
-.form-sec .sec-title{color:#fff;}
-.form-sec .sec-title em{color:var(--arancio);}
-.form-sec .sec-lead{color:rgba(255,255,255,.5);max-width:480px;margin-bottom:52px;}
-.form-wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
-
-/* form info left */
-.fi-item{display:flex;gap:16px;padding:20px 0;border-bottom:1px solid rgba(255,255,255,.06);}
-.fi-item:last-child{border-bottom:none;}
-.fi-item .fi-icon{font-size:1.5rem;flex-shrink:0;}
-.fi-item strong{display:block;font-size:.9rem;font-weight:600;color:#fff;margin-bottom:3px;}
-.fi-item span{font-size:.82rem;color:rgba(255,255,255,.45);line-height:1.5;font-weight:300;}
-
-/* form right panel */
-.form-panel{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:48px 44px;}
-
-/* role selector */
-.role-selector{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:32px;}
-.role-btn{background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);color:rgba(255,255,255,.55);padding:18px 16px;text-align:center;cursor:pointer;transition:all .2s;border-radius:2px;}
-.role-btn .rb-icon{font-size:1.6rem;display:block;margin-bottom:6px;}
-.role-btn .rb-label{font-size:.83rem;font-weight:600;letter-spacing:.04em;}
-.role-btn .rb-sub{font-size:.71rem;opacity:.65;margin-top:3px;}
-.role-btn.active{background:rgba(200,52,26,.25);border-color:var(--rosso);color:#fff;}
-.role-btn:hover:not(.active){background:rgba(255,255,255,.1);}
-
-/* fields */
-.form-fields{display:flex;flex-direction:column;gap:16px;}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
-.field-row.full{grid-template-columns:1fr;}
-.fw{display:flex;flex-direction:column;gap:5px;}
-.fw label{font-size:.73rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.42);}
-.fw input,.fw select,.fw textarea{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);color:#fff;padding:12px 14px;font-size:.9rem;border-radius:2px;font-family:'DM Sans',sans-serif;transition:border-color .2s;outline:none;width:100%;}
-.fw input::placeholder,.fw textarea::placeholder{color:rgba(255,255,255,.28);}
-.fw input:focus,.fw select:focus,.fw textarea:focus{border-color:var(--arancio);background:rgba(255,255,255,.1);}
-.fw select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='rgba(255,255,255,.38)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:35px;cursor:pointer;}
-.fw select option{background:#3d1e08;color:#fff;}
-.fw textarea{resize:vertical;min-height:96px;}
-
-/* check items */
-.check-group{display:flex;flex-direction:column;gap:6px;}
-.check-group > label{font-size:.73rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:rgba(255,255,255,.42);}
-.check-items{display:flex;gap:8px;flex-wrap:wrap;}
-.check-item{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:2px;padding:8px 13px;cursor:pointer;transition:all .2s;user-select:none;}
-.check-item input[type="checkbox"]{display:none;}
-.check-item .ci-lbl{font-size:.82rem;color:rgba(255,255,255,.58);font-weight:500;}
-.check-item.checked{background:rgba(200,52,26,.22);border-color:var(--rosso);}
-.check-item.checked .ci-lbl{color:#fff;}
-
-/* conditional */
+/* form fields */
+.fform{display:flex;flex-direction:column;gap:13px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.frow.full{grid-template-columns:1fr;}
+.fw label{display:block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--testo-m);margin-bottom:4px;}
+.fw input,.fw select,.fw textarea{width:100%;background:#fff;border:1.5px solid var(--sabbia-s);color:var(--testo);padding:11px 13px;font-size:.9rem;border-radius:2px;font-family:'DM Sans',sans-serif;transition:border-color .2s;outline:none;}
+.fw input::placeholder,.fw textarea::placeholder{color:rgba(106,68,35,.35);}
+.fw input:focus,.fw select:focus,.fw textarea:focus{border-color:var(--rosso);}
+.fw select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%236B4423' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:34px;cursor:pointer;}
+.fw select option{background:#fff;color:var(--testo);}
+.fw textarea{resize:vertical;min-height:80px;}
 .cond{display:none;}
 .cond.show{display:contents;}
 
-/* privacy */
-.priv-row{display:flex;align-items:flex-start;gap:10px;margin-top:4px;}
-.priv-row input[type="checkbox"]{margin-top:3px;flex-shrink:0;accent-color:var(--rosso);}
-.priv-row label{font-size:.77rem;color:rgba(255,255,255,.36);line-height:1.5;cursor:pointer;}
-.priv-row label a{color:rgba(255,255,255,.52);}
+/* check pills */
+.cpgroup label{display:block;font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--testo-m);margin-bottom:7px;}
+.cpills{display:flex;gap:7px;flex-wrap:wrap;}
+.cpill{background:var(--sabbia);border:1.5px solid var(--sabbia-s);padding:7px 13px;border-radius:100px;font-size:.8rem;font-weight:500;color:var(--testo-m);cursor:pointer;transition:all .2s;user-select:none;}
+.cpill.on{background:var(--rosso);border-color:var(--rosso);color:#fff;}
 
-.form-error{background:rgba(200,52,26,.2);border:1px solid rgba(200,52,26,.4);border-radius:3px;padding:11px 16px;font-size:.83rem;color:#ffbbaa;margin-top:4px;display:none;}
+/* privacy + submit */
+.priv{display:flex;align-items:flex-start;gap:9px;}
+.priv input{margin-top:3px;flex-shrink:0;accent-color:var(--rosso);}
+.priv label{font-size:.75rem;color:var(--testo-m);line-height:1.5;cursor:pointer;}
+.priv label a{color:var(--rosso);}
+.ferr{background:rgba(200,52,26,.1);border:1px solid rgba(200,52,26,.3);border-radius:2px;padding:10px 14px;font-size:.82rem;color:var(--rosso);display:none;}
+.fsub{width:100%;background:var(--rosso);color:#fff;border:none;padding:15px 24px;font-size:.93rem;font-weight:600;border-radius:2px;cursor:pointer;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .25s;}
+.fsub:hover{background:var(--rosso-s);}
+.fsub:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+.fsuccess{display:none;text-align:center;padding:40px 20px;}
+.fsuccess .fsi{font-size:2.8rem;margin-bottom:14px;}
+.fsuccess h3{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--testo);margin-bottom:10px;}
+.fsuccess p{font-size:.9rem;color:var(--testo-m);line-height:1.65;}
 
-.submit-btn{width:100%;background:var(--rosso);color:#fff;border:none;padding:16px 24px;font-size:.95rem;font-weight:600;border-radius:2px;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:.01em;transition:all .25s;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:9px;}
-.submit-btn:hover{background:var(--rosso-s);transform:translateY(-1px);}
-.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+/* ── HERO ── */
+.hero{min-height:100vh;background:linear-gradient(148deg,var(--sabbia) 0%,var(--crema) 50%,#fff8ee 100%);display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:120px 96px 90px;gap:60px;position:relative;overflow:hidden;}
+.hero-glow{position:absolute;right:-80px;top:42%;transform:translateY(-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(232,131,26,.14) 0%,transparent 68%);pointer-events:none;}
+.hero-left{position:relative;z-index:1;}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(200,52,26,.08);border:1px solid rgba(200,52,26,.2);color:var(--rosso);padding:6px 14px;border-radius:100px;font-size:.75rem;font-weight:600;margin-bottom:24px;letter-spacing:.04em;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,4.6vw,5rem);line-height:.96;font-weight:900;color:var(--testo);letter-spacing:-.025em;margin-bottom:14px;}
+.hero-title em{font-style:italic;color:var(--rosso);display:block;}
+.hero-posiz{font-size:.88rem;font-weight:600;color:var(--terra);letter-spacing:.02em;margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+.hero-posiz::before{content:'';display:block;width:24px;height:1.5px;background:var(--terra);}
+.hero-sub{font-size:1.08rem;line-height:1.74;color:var(--testo-m);max-width:460px;margin-bottom:40px;font-weight:300;}
+.hero-sub strong{color:var(--testo);font-weight:600;}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
+.hero-targets{display:flex;gap:8px;flex-wrap:wrap;}
+.ht{background:rgba(200,52,26,.06);border:1px solid rgba(200,52,26,.15);color:var(--rosso);padding:6px 14px;border-radius:100px;font-size:.78rem;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none;}
+.ht:hover{background:rgba(200,52,26,.12);}
 
-.form-success{display:none;text-align:center;padding:52px 32px;}
-.form-success .fs-icon{font-size:3.2rem;margin-bottom:16px;}
-.form-success h3{font-family:'Playfair Display',serif;font-size:1.8rem;color:#fff;margin-bottom:10px;}
-.form-success p{font-size:.92rem;color:rgba(255,255,255,.52);line-height:1.65;}
+/* phone */
+.hero-right{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;}
+.phone-wrap{position:relative;}
+.phone-frame{width:252px;height:450px;background:#1a0c04;border-radius:34px;box-shadow:0 40px 80px rgba(0,0,0,.22),0 0 0 7px #2e1c0c;overflow:hidden;position:relative;z-index:2;}
+.phone-screen{width:100%;height:100%;background:linear-gradient(180deg,var(--sabbia) 0%,var(--crema) 100%);padding:20px 11px 14px;display:flex;flex-direction:column;gap:6px;}
+.ph-logo{font-family:'Playfair Display',serif;font-size:.95rem;font-weight:700;font-style:italic;color:var(--rosso);text-align:center;}
+.ph-hotel{font-size:.46rem;color:var(--testo-m);text-align:center;margin-bottom:3px;letter-spacing:.07em;text-transform:uppercase;}
+.ph-sec{font-size:.52rem;font-weight:700;color:var(--terra);text-transform:uppercase;letter-spacing:.08em;margin-top:2px;}
+.ph-card{background:#fff;border-radius:6px;padding:6px 8px;box-shadow:0 2px 5px rgba(0,0,0,.07);display:flex;align-items:center;gap:6px;}
+.ph-ico{width:22px;height:22px;flex-shrink:0;}
+.ph-name{font-size:.53rem;font-weight:600;color:var(--testo);}
+.ph-rest{font-size:.44rem;color:var(--testo-m);margin-top:1px;}
+.ph-price{font-size:.6rem;font-weight:700;color:var(--rosso);margin-left:auto;white-space:nowrap;}
+.ph-cta{background:var(--rosso);color:#fff;border-radius:5px;padding:6px;text-align:center;font-size:.52rem;font-weight:600;margin-top:2px;}
+.ph-tag1{position:absolute;right:-18px;top:65px;z-index:3;background:#3D6B2C;color:#fff;padding:5px 10px;border-radius:20px;font-size:.55rem;font-weight:600;white-space:nowrap;}
+.ph-tag2{position:absolute;left:-28px;bottom:95px;z-index:3;background:#fff;color:var(--testo);padding:7px 10px;border-radius:8px;font-size:.52rem;box-shadow:0 6px 18px rgba(0,0,0,.12);border:1px solid var(--sabbia-s);white-space:nowrap;}
+.ph-tag2 strong{display:block;font-size:.62rem;color:var(--rosso);font-weight:700;}
+.float-f{position:absolute;animation:flt 3s ease-in-out infinite;pointer-events:none;}
+.f1{top:15px;left:6px;animation-delay:0s;}
+.f2{top:45px;right:-2px;animation-delay:.9s;}
+.f3{bottom:60px;right:-3px;animation-delay:1.8s;}
+.f4{bottom:25px;left:3px;animation-delay:.4s;}
+@keyframes flt{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
-/* FOOTER */
-footer{background:#0e0603;padding:34px 96px;display:flex;align-items:center;justify-content:space-between;}
-.foot-logo{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;font-style:italic;color:var(--sabbia);}
-footer p{font-size:.74rem;color:rgba(255,255,255,.24);}
-.foot-links{display:flex;gap:22px;}
-.foot-links a{font-size:.74rem;color:rgba(255,255,255,.3);text-decoration:none;}
+/* ── STATS BAR ── */
+.stats-bar{background:var(--rosso);display:grid;grid-template-columns:repeat(4,1fr);}
+.stat{text-align:center;color:#fff;padding:28px 16px;border-right:1px solid rgba(255,255,255,.15);}
+.stat:last-child{border-right:none;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;line-height:1;margin-bottom:4px;}
+.stat-lbl{font-size:.72rem;opacity:.78;letter-spacing:.07em;text-transform:uppercase;}
+
+/* ── POSIZIONAMENTO ANTI-GLOVO ── */
+.posiz-sec{background:var(--scuro);padding:72px 96px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.posiz-left .eyebrow{color:rgba(245,230,200,.55);}
+.posiz-left .eyebrow::before{background:rgba(245,230,200,.35);}
+.posiz-headline{font-family:'Playfair Display',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:900;color:#fff;line-height:1.06;margin-bottom:20px;}
+.posiz-headline em{font-style:italic;color:var(--arancio);}
+.posiz-sub{font-size:.96rem;line-height:1.72;color:rgba(255,255,255,.5);font-weight:300;}
+.posiz-right{display:flex;flex-direction:column;gap:0;}
+.vs-row{display:flex;gap:0;border-bottom:1px solid rgba(255,255,255,.06);padding:16px 0;}
+.vs-row:last-child{border-bottom:none;}
+.vs-col{flex:1;padding:0 16px;font-size:.86rem;line-height:1.5;}
+.vs-col:first-child{padding-left:0;color:rgba(255,255,255,.52);font-weight:300;font-size:.82rem;}
+.vs-col:last-child{color:#fff;font-weight:600;font-size:.92rem;}
+.vs-head{display:flex;gap:0;margin-bottom:4px;}
+.vs-head-col{flex:1;padding:0 16px;font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;}
+.vs-head-col:first-child{padding-left:0;color:rgba(255,255,255,.45);}
+.vs-head-col:last-child{color:var(--arancio);}
+.vs-divider{width:1px;background:rgba(255,255,255,.08);flex-shrink:0;}
+
+/* ── COME FUNZIONA ── */
+.how-sec{background:var(--crema);padding:96px;}
+.how-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:48px;}
+.how-card{background:#fff;padding:38px 28px;position:relative;overflow:hidden;transition:transform .3s;}
+.how-card:hover{transform:translateY(-4px);}
+.how-card::before{content:attr(data-n);position:absolute;top:-16px;right:12px;font-family:'Playfair Display',serif;font-size:6.5rem;font-weight:900;color:var(--sabbia);line-height:1;pointer-events:none;}
+.how-icon{width:36px;height:36px;margin-bottom:14px;}
+.how-card h3{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;margin-bottom:8px;color:var(--testo);}
+.how-card p{font-size:.88rem;line-height:1.66;color:var(--testo-m);font-weight:300;}
+
+/* ── SEZIONI TARGET ── */
+/* target header */
+.target-intro{background:var(--bianco);padding:80px 96px 0;}
+.target-intro .eyebrow{margin-bottom:12px;}
+
+/* OSPITI */
+.ospiti-sec{background:var(--bianco);padding:0 96px 96px;}
+.ospiti-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;margin-top:52px;}
+.osp-l h2{font-family:'Playfair Display',serif;font-size:2rem;font-weight:800;line-height:1.18;margin-bottom:14px;}
+.osp-l h2 em{font-style:italic;color:var(--rosso);}
+.osp-l p{font-size:.95rem;line-height:1.74;color:var(--testo-m);margin-bottom:26px;font-weight:300;}
+.chklist{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:32px;}
+.chklist li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--testo);line-height:1.5;}
+.ck{flex-shrink:0;width:18px;height:18px;background:var(--rosso);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:2px;}
+.osp-r{background:linear-gradient(135deg,var(--sabbia),var(--sabbia-s));border-radius:4px;padding:40px;position:relative;overflow:hidden;}
+.osp-r::after{content:attr(data-i);position:absolute;bottom:-20px;right:-8px;font-size:7rem;opacity:.08;pointer-events:none;}
+.osp-r blockquote{font-family:'Playfair Display',serif;font-size:1.15rem;line-height:1.56;color:var(--terra);font-style:italic;margin-bottom:16px;}
+.osp-r cite{font-size:.75rem;color:var(--testo-m);font-style:normal;font-weight:500;letter-spacing:.04em;text-transform:uppercase;}
+.hbox{background:#fff;border-radius:3px;padding:14px 18px;margin-top:18px;border-left:3px solid var(--rosso);}
+.hbox strong{display:block;font-size:1.35rem;color:var(--rosso);font-family:'Playfair Display',serif;}
+.hbox span{font-size:.78rem;color:var(--testo-m);}
+
+/* ALBERGATORI */
+.alb-sec{background:var(--sabbia);padding:96px;}
+.alb-intro{max-width:640px;margin-bottom:56px;}
+.alb-intro h2{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;line-height:1.1;margin-bottom:14px;}
+.alb-intro h2 em{font-style:italic;color:var(--rosso);}
+.alb-intro p{font-size:.96rem;line-height:1.74;color:var(--testo-m);font-weight:300;}
+
+/* piani Flex / Full Board */
+.piani-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-bottom:48px;}
+.piano{background:#fff;padding:44px 36px;position:relative;overflow:hidden;transition:transform .3s;}
+.piano:hover{transform:translateY(-4px);}
+.piano-badge{display:inline-flex;align-items:center;gap:8px;margin-bottom:18px;}
+.piano-name{font-family:'Playfair Display',serif;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--rosso);}
+.piano-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--testo);margin-bottom:10px;line-height:1.1;}
+.piano-desc{font-size:.9rem;line-height:1.68;color:var(--testo-m);margin-bottom:24px;font-weight:300;}
+.piano-tag{display:inline-block;background:var(--crema);border:1px solid var(--sabbia-s);color:var(--terra);padding:4px 12px;border-radius:100px;font-size:.72rem;font-weight:600;margin-bottom:20px;}
+.piano-feats{list-style:none;display:flex;flex-direction:column;gap:9px;}
+.piano-feats li{display:flex;align-items:flex-start;gap:9px;font-size:.86rem;color:var(--testo);line-height:1.45;}
+.piano-feats li .ck{background:var(--rosso);}
+.piano-feats li .ck-o{background:transparent;border:1.5px solid var(--sabbia-s);}
+.piano.featured{background:var(--testo);}
+.piano.featured .piano-name{color:var(--arancio);}
+.piano.featured .piano-title{color:#fff;}
+.piano.featured .piano-desc{color:rgba(255,255,255,.55);}
+.piano.featured .piano-tag{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.15);color:rgba(255,255,255,.6);}
+.piano.featured .piano-feats li{color:#fff;}
+.piano.featured .piano-feats li .ck{background:var(--arancio);}
+.piano.featured .piano-feats li .ck-o{border-color:rgba(255,255,255,.2);}
+.piano-cta{margin-top:28px;}
+.alb-note{background:rgba(200,52,26,.08);border:1px solid rgba(200,52,26,.18);border-radius:3px;padding:16px 22px;font-size:.86rem;color:var(--terra);line-height:1.6;}
+.alb-note strong{font-weight:600;color:var(--rosso);}
+
+/* RISTORATORI */
+.ris-sec{display:grid;grid-template-columns:1fr 1fr;}
+.ris-l{padding:96px 80px;background:var(--bianco);}
+.ris-r{padding:96px 80px;background:var(--rosso);color:#fff;display:flex;flex-direction:column;justify-content:center;}
+.ris-r .eyebrow{color:rgba(255,255,255,.6);}
+.ris-r .eyebrow::before{background:rgba(255,255,255,.3);}
+.ris-feats{list-style:none;display:flex;flex-direction:column;}
+.ris-feats li{display:flex;gap:13px;align-items:flex-start;padding:13px 0;border-bottom:1px solid rgba(0,0,0,.06);}
+.ris-feats li:last-child{border-bottom:none;}
+.ris-feats li .fi{width:20px;height:20px;flex-shrink:0;margin-top:2px;}
+.ris-feats li strong{display:block;font-size:.9rem;font-weight:600;}
+.ris-feats li span{font-size:.82rem;color:var(--testo-m);font-weight:300;line-height:1.45;}
+.ris-r-inner{}
+.ris-vantaggi{list-style:none;display:flex;flex-direction:column;gap:0;}
+.rv{display:flex;gap:13px;align-items:flex-start;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1);}
+.rv:last-child{border-bottom:none;}
+.rv .rvi{width:20px;height:20px;flex-shrink:0;margin-top:2px;}
+.rv strong{display:block;font-size:.9rem;font-weight:600;color:#fff;margin-bottom:2px;}
+.rv span{font-size:.82rem;color:rgba(255,255,255,.55);font-weight:300;line-height:1.45;}
+.ris-note{background:rgba(255,255,255,.1);border-radius:3px;padding:16px 20px;margin-top:24px;font-size:.82rem;color:rgba(255,255,255,.65);line-height:1.6;}
+.ris-note strong{color:#fff;}
+
+/* ── STEPS ── */
+.steps-sec{background:var(--scuro);padding:96px;}
+.steps-sec .eyebrow{color:var(--sabbia);}
+.steps-sec .eyebrow::before{background:var(--sabbia);}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:48px;}
+.step{background:rgba(255,255,255,.05);padding:32px 20px;border:1px solid rgba(255,255,255,.07);position:relative;transition:background .3s;}
+.step:hover{background:rgba(255,255,255,.09);}
+.step-n{font-family:'Playfair Display',serif;font-size:2.6rem;font-weight:900;color:var(--rosso);line-height:1;margin-bottom:12px;}
+.step h3{font-size:.94rem;font-weight:600;color:#fff;margin-bottom:7px;}
+.step p{font-size:.82rem;line-height:1.6;color:rgba(255,255,255,.46);font-weight:300;}
+.step-arr{position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--arancio);font-size:1rem;z-index:2;}
+.step:last-child .step-arr{display:none;}
+
+/* ── ZONA ── */
+.zona-sec{background:#fff;padding:96px;text-align:center;}
+.zona-sec .sec-title{margin:0 auto 14px;}
+.zona-sec .sec-lead{margin:0 auto 40px;max-width:500px;}
+.comuni{display:flex;gap:9px;flex-wrap:wrap;justify-content:center;margin-bottom:24px;}
+.chip{background:var(--crema);border:1.5px solid var(--sabbia-s);border-radius:2px;padding:9px 18px;font-size:.82rem;font-weight:500;color:var(--testo);}
+.chip.now{background:var(--rosso);color:#fff;border-color:var(--rosso);}
+.zona-note{font-size:.8rem;color:var(--testo-m);font-style:italic;}
+
+/* ── CTA FINALE ── */
+.cta-sec{background:linear-gradient(140deg,var(--scuro) 0%,#3d1e08 100%);padding:96px;text-align:center;position:relative;overflow:hidden;}
+.cta-sec::before{content:'Saporì';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:'Playfair Display',serif;font-size:15rem;font-weight:900;font-style:italic;color:rgba(255,255,255,.025);white-space:nowrap;pointer-events:none;}
+.cta-sec .eyebrow{color:var(--sabbia);justify-content:center;}
+.cta-sec .eyebrow::before{background:var(--sabbia);}
+.cta-title{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:900;color:#fff;line-height:1.08;margin-bottom:16px;}
+.cta-title em{font-style:italic;color:var(--arancio);}
+.cta-lead{font-size:1rem;color:rgba(255,255,255,.5);margin-bottom:40px;font-weight:300;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.7;}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1;}
+
+/* ── FOOTER ── */
+footer{background:#0e0603;padding:30px 96px;display:flex;align-items:center;justify-content:space-between;}
+.foot-logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;font-style:italic;color:var(--sabbia);}
+.foot-logo .logo-i{color:var(--arancio);}
+footer p{font-size:.72rem;color:rgba(255,255,255,.22);}
+.foot-links{display:flex;gap:20px;}
+.foot-links a{font-size:.72rem;color:rgba(255,255,255,.28);text-decoration:none;}
 .foot-links a:hover{color:var(--sabbia);}
 
-/* RESPONSIVE */
+/* ── RESPONSIVE ── */
 @media(max-width:960px){
   nav{padding:14px 22px;}
   .nav-links{display:none;}
-  .hero{grid-template-columns:1fr;padding:96px 24px 64px;gap:36px;}
+  .hero{grid-template-columns:1fr;padding:90px 24px 60px;gap:32px;}
   .hero-right{display:none;}
   .stats-bar{grid-template-columns:repeat(2,1fr);}
-  .stat-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.12);}
-  .how-sec,.steps-sec,.zona-sec{padding:64px 24px;}
+  .stat{border-right:none;border-bottom:1px solid rgba(255,255,255,.12);}
+  .posiz-sec,.ospiti-grid,.ris-sec{grid-template-columns:1fr;}
+  .piani-grid{grid-template-columns:1fr;}
+  .how-sec,.steps-sec,.zona-sec,.cta-sec,.target-intro,.ospiti-sec,.alb-sec,.ris-l,.ris-r{padding:60px 24px;}
   .how-grid,.steps-grid{grid-template-columns:1fr;}
-  .tabs-header,.tab-nav,.tab-body{padding-left:24px;padding-right:24px;}
-  .tab-pane.active{grid-template-columns:1fr;}
-  .risto-sec{grid-template-columns:1fr;}
-  .risto-l,.risto-r{padding:64px 24px;}
-  .form-sec{padding:64px 24px;}
-  .form-wrap{grid-template-columns:1fr;}
-  .field-row{grid-template-columns:1fr;}
-  .form-panel{padding:32px 24px;}
   .step-arr{display:none;}
-  footer{flex-direction:column;gap:14px;padding:26px 24px;text-align:center;}
+  footer{flex-direction:column;gap:12px;padding:24px;text-align:center;}
   .foot-links{justify-content:center;}
+  #gdpr{padding:14px 20px;flex-direction:column;align-items:flex-start;}
 }
 </style>
 </head>
 <body>
 
+<!-- GDPR BANNER -->
+<div id="gdpr">
+  <p>Questo sito utilizza cookie tecnici necessari al funzionamento. Non utilizziamo cookie di profilazione di terze parti senza il tuo consenso. <a href="#">Privacy policy</a>.</p>
+  <div class="gdpr-btns">
+    <button class="gdpr-btn gdpr-accept" onclick="gdprAccept()">Accetto</button>
+    <button class="gdpr-btn gdpr-reject" onclick="gdprReject()">Solo necessari</button>
+  </div>
+</div>
+
+<!-- MODAL FORM -->
+<div id="modal-overlay" role="dialog" aria-modal="true" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal-box">
+    <div class="modal-head">
+      <h2 id="modal-title">Iscriviti — estate 2026</h2>
+      <p>Bellaria-Igea Marina · Estate 2026 · Risposta entro 48h</p>
+      <button class="modal-close" onclick="closeModal()" aria-label="Chiudi">✕</button>
+    </div>
+    <div class="modal-body">
+      <div id="form-wrap">
+        <div class="role-pills">
+          <div class="rp active" id="rp-alb" onclick="setRole('albergatore')">
+            <span class="rp-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="7" width="20" height="15" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M8 22V17h8v5" stroke="currentColor" stroke-width="1.5"/><path d="M2 11h20M6 7V4a1 1 0 011-1h10a1 1 0 011 1v3" stroke="currentColor" stroke-width="1.5"/></svg>
+            </span>
+            <div class="rp-label">Albergatore</div>
+            <div class="rp-sub">Hotel, B&B, pensione</div>
+          </div>
+          <div class="rp" id="rp-ris" onclick="setRole('ristoratore')">
+            <span class="rp-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v6M12 8c-3.314 0-6 2.239-6 5v1h12v-1c0-2.761-2.686-5-6-5zM6 14v7M18 14v7M3 21h18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </span>
+            <div class="rp-label">Ristoratore</div>
+            <div class="rp-sub">Ristorante, bar, pasticceria</div>
+          </div>
+        </div>
+
+        <div class="fform" id="fform">
+          <div class="frow">
+            <div class="fw"><label>Nome e cognome *</label><input type="text" id="f-nome" placeholder="Mario Rossi"></div>
+            <div class="fw"><label>Telefono</label><input type="tel" id="f-tel" placeholder="+39 333 000 0000"></div>
+          </div>
+          <div class="frow full"><div class="fw"><label>Email *</label><input type="email" id="f-email" placeholder="mario@esempio.it"></div></div>
+
+          <div class="frow full"><div class="fw"><label>Comune *</label><input type="text" id="f-comune" placeholder="es. Bellaria-Igea Marina, Rimini…"></div></div>
+
+          <!-- ALBERGATORE fields -->
+          <div class="cond show" id="cond-alb">
+            <div class="frow">
+              <div class="fw"><label>Nome struttura *</label><input type="text" id="f-struttura" placeholder="Hotel Adriatico"></div>
+              <div class="fw"><label>N° camere</label>
+                <select id="f-camere">
+                  <option value="">Seleziona</option>
+                  <option>Meno di 10</option><option>10–20</option><option>21–40</option><option>41–60</option><option>Oltre 60</option>
+                </select>
+              </div>
+            </div>
+            <div class="cpgroup">
+              <label>Quale pasto vorresti coprire?</label>
+              <div class="cpills">
+                <div class="cpill" onclick="this.classList.toggle('on')">Flex — à la carte</div>
+                <div class="cpill" onclick="this.classList.toggle('on')">Full Board — pensione completa</div>
+              </div>
+            </div>
+            <div class="cpgroup">
+              <label>Quale pasto vorresti coprire?</label>
+              <div class="cpills">
+                <div class="cpill" onclick="this.classList.toggle('on')">Colazione</div>
+                <div class="cpill" onclick="this.classList.toggle('on')">Pranzo</div>
+                <div class="cpill" onclick="this.classList.toggle('on')">Cena</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RISTORATORE fields -->
+          <div class="cond" id="cond-ris">
+            <div class="frow">
+              <div class="fw"><label>Nome locale *</label><input type="text" id="f-locale" placeholder="Osteria del Porto"></div>
+              <div class="fw"><label>Tipo di locale</label>
+                <select id="f-tipo">
+                  <option value="">Seleziona</option>
+                  <option>Ristorante</option><option>Trattoria / Osteria</option><option>Bar / Caffetteria</option><option>Pasticceria</option><option>Rosticceria</option><option>Altro</option>
+                </select>
+              </div>
+            </div>
+            <div class="frow full"><div class="fw"><label>Coperti medi/giorno</label>
+              <select id="f-coperti">
+                <option value="">Seleziona</option>
+                <option>Meno di 30</option><option>30–60</option><option>61–100</option><option>Oltre 100</option>
+              </select>
+            </div></div>
+            <div class="cpgroup">
+              <label>Fasce orarie disponibili</label>
+              <div class="cpills">
+                <div class="cpill" onclick="this.classList.toggle('on')">Colazione</div>
+                <div class="cpill" onclick="this.classList.toggle('on')">Pranzo</div>
+                <div class="cpill" onclick="this.classList.toggle('on')">Cena</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="frow full"><div class="fw"><label>Domande o note</label><textarea id="f-msg" placeholder="Scrivi qui..."></textarea></div></div>
+
+          <div class="priv">
+            <input type="checkbox" id="f-priv">
+            <label for="f-priv">Acconsento al trattamento dei dati ai sensi dell'art. 13 GDPR per essere ricontattato da Saporì. <a href="#">Privacy policy</a>.</label>
+          </div>
+
+          <div class="ferr" id="ferr"></div>
+
+          <button class="fsub" id="fsub" onclick="submitForm()">
+            <span id="fsub-txt">Invia richiesta</span>
+            <svg id="fsub-arr" width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+
+        <div class="fsuccess" id="fsuccess">
+          <div class="fsi">🎉</div>
+          <h3>Richiesta inviata!</h3>
+          <p>Ti ricontattiamo entro 48 ore.<br>Grazie per l'interesse in Saporì.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
 <nav id="nav">
-  <a href="#top" class="nav-logo">Sapor<span>ì</span></a>
+  <a href="#top" onclick="scrollSec('top',event)" class="nav-logo">Sapor<span class="logo-i">ì</span></a>
   <div class="nav-links">
-    <a href="#come-funziona">Come funziona</a>
-    <a href="#per-chi">Per gli hotel</a>
-    <a href="#ristoratori">Per i ristoranti</a>
-    <a href="#contatti" class="nav-cta" data-ph="nav_cta">Iscriviti</a>
+    <a href="#albergatori" onclick="scrollSec('albergatori',event)">Per gli hotel</a>
+    <a href="#ristoratori" onclick="scrollSec('ristoratori',event)">Per i ristoranti</a>
+    <a href="#" class="nav-cta" data-ph="nav_cta" onclick="openModal(event,'')">Iscriviti</a>
   </div>
 </nav>
 
@@ -320,44 +505,51 @@ footer p{font-size:.74rem;color:rgba(255,255,255,.24);}
 <section class="hero" id="top">
   <div class="hero-glow"></div>
   <div class="hero-left reveal">
-    <div class="hero-eyebrow">Bellaria-Igea Marina · Estate 2026</div>
-    <h1 class="hero-title">Il buon cibo<br><em>ti raggiunge</em><br>in vacanza.</h1>
-    <p class="hero-sub">Ordina colazione, pranzo e cena dai <strong>migliori ristoranti locali</strong> scelti dal tuo hotel. Menu dedicati, consegna in struttura, zero pensieri.</p>
+    <div class="hero-tag">📍 Bellaria-Igea Marina · Estate 2026</div>
+    <h1 class="hero-title">La cucina<br><em>esternalizzata</em><br>del tuo hotel.</h1>
+    <div class="hero-posiz">Non siamo delivery. Siamo un servizio su misura.</div>
+    <p class="hero-sub">Saporì porta colazione, pranzo e cena dai <strong>ristoranti locali scelti dall'albergatore</strong> direttamente agli ospiti in struttura — con menù dedicati, ordini programmati, zero costi per l'hotel.</p>
     <div class="hero-actions">
-      <a href="#come-funziona" class="btn-primary" data-ph="hero_cta_scopri">Scopri come funziona →</a>
-      <a href="#per-chi" class="btn-secondary" data-ph="hero_cta_hotel">Sei un albergatore?</a>
+      <a href="#" class="btn btn-red" data-ph="hero_cta_iscriviti" onclick="openModal(event,'')">Iscriviti — estate 2026</a>
+      <a href="#come-funziona" class="btn btn-outline" onclick="scrollSec('come-funziona',event)">Come funziona</a>
     </div>
-    <div class="hero-pills">
-      <span class="hero-pill">☀️ Colazione</span>
-      <span class="hero-pill">🍝 Pranzo</span>
-      <span class="hero-pill">🦞 Cena</span>
-      <span class="hero-pill">🏨 Pensione completa</span>
+    <div class="hero-targets">
+      <a href="#albergatori" class="ht" onclick="scrollSec('albergatori',event)">Sono un albergatore</a>
+      <a href="#ristoratori" class="ht" onclick="scrollSec('ristoratori',event)">Sono un ristoratore</a>
     </div>
   </div>
   <div class="hero-right reveal">
     <div class="phone-wrap">
-      <span class="float-food ff1">🥐</span>
-      <span class="float-food ff2">🍋</span>
-      <span class="float-food ff3">🦞</span>
-      <span class="float-food ff4">🥗</span>
+      <div class="float-f f1">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="14" fill="#F5E6C8"/><text x="7" y="19" font-size="14">🥐</text></svg>
+      </div>
+      <div class="float-f f2" style="animation-delay:.9s">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#EDD9A3"/><text x="4" y="16" font-size="12">🍋</text></svg>
+      </div>
+      <div class="float-f f3" style="animation-delay:1.8s">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="14" fill="#F5E6C8"/><text x="6" y="19" font-size="14">🦞</text></svg>
+      </div>
+      <div class="float-f f4" style="animation-delay:.4s">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#EDD9A3"/><text x="3" y="16" font-size="12">🥗</text></svg>
+      </div>
       <div class="phone-frame">
         <div class="phone-screen">
-          <div class="ph-logo">Saporì</div>
-          <div class="ph-hotel">Menu Hotel Adriatico · Bellaria</div>
-          <div class="ph-section">☀️ Colazione — ordina entro 21:00</div>
+          <div class="ph-logo">Sapor<span style="color:var(--arancio)">ì</span></div>
+          <div class="ph-hotel">Menu Hotel Adriatico</div>
+          <div class="ph-sec">Colazione — ordina entro 21:00</div>
           <div class="ph-card">
-            <span class="ph-emoji">🥐</span>
-            <div><div class="ph-name">Cornetto + caffè</div><div class="ph-rest">Bar Roma · consegna 8:30</div></div>
+            <svg class="ph-ico" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" fill="#F5E6C8"/><path d="M7 12c0-2.2 1.8-4 4-4s4 1.8 4 4" stroke="#C8341A" stroke-width="1.2"/><path d="M11 8V6M7 12H5M19 12h-2" stroke="#C8341A" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <div><div class="ph-name">Cornetto + caffè</div><div class="ph-rest">Bar Roma · 8:30</div></div>
             <div class="ph-price">€5</div>
           </div>
-          <div class="ph-section">🍝 Pranzo — ordina entro 11:30</div>
+          <div class="ph-sec">Pranzo — ordina entro 11:30</div>
           <div class="ph-card">
-            <span class="ph-emoji">🐟</span>
-            <div><div class="ph-name">Grigliata mista di pesce</div><div class="ph-rest">Osteria del Porto · 13:00</div></div>
+            <svg class="ph-ico" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" fill="#F5E6C8"/><path d="M6 15c0-3 2-5 5-5s5 2 5 5" stroke="#C8341A" stroke-width="1.2"/><path d="M11 10V7M8 8l1 1M14 8l-1 1" stroke="#C8341A" stroke-width="1.2" stroke-linecap="round"/></svg>
+            <div><div class="ph-name">Grigliata di pesce</div><div class="ph-rest">Osteria del Porto · 13:00</div></div>
             <div class="ph-price">€22</div>
           </div>
           <div class="ph-card">
-            <span class="ph-emoji">🍝</span>
+            <svg class="ph-ico" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="10" fill="#F5E6C8"/><ellipse cx="11" cy="13" rx="6" ry="3" stroke="#C8341A" stroke-width="1.2"/><path d="M11 10V7" stroke="#C8341A" stroke-width="1.2" stroke-linecap="round"/></svg>
             <div><div class="ph-name">Tagliatelle al ragù</div><div class="ph-rest">Da Nonna · 13:00</div></div>
             <div class="ph-price">€14</div>
           </div>
@@ -365,127 +557,280 @@ footer p{font-size:.74rem;color:rgba(255,255,255,.24);}
         </div>
       </div>
       <div class="ph-tag1">✓ Menu dedicato</div>
-      <div class="ph-tag2"><strong>Consegna in hotel</strong>Orario garantito</div>
+      <div class="ph-tag2"><strong>Consegna garantita</strong>Orario preciso</div>
     </div>
   </div>
 </section>
 
 <!-- STATS -->
 <div class="stats-bar reveal">
-  <div class="stat-item"><div class="stat-num">€0</div><div class="stat-lbl">Costo per l'hotel</div></div>
-  <div class="stat-item"><div class="stat-num">3×</div><div class="stat-lbl">Pasti al giorno</div></div>
-  <div class="stat-item"><div class="stat-num">+20%</div><div class="stat-lbl">Solo sul venduto</div></div>
-  <div class="stat-item"><div class="stat-num">100%</div><div class="stat-lbl">Ristoranti locali</div></div>
+  <div class="stat"><div class="stat-num">€0</div><div class="stat-lbl">Costo per l'hotel</div></div>
+  <div class="stat"><div class="stat-num">3×</div><div class="stat-lbl">Pasti al giorno</div></div>
+  <div class="stat"><div class="stat-num" style="font-size:1.1rem;line-height:1.3;letter-spacing:-.01em">Pensione completa</div><div class="stat-lbl">senza personale dedicato</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-lbl">Ristoranti locali</div></div>
 </div>
 
-<!-- COME FUNZIONA -->
-<section class="how-sec" id="come-funziona">
-  <div class="eyebrow reveal">Il servizio</div>
-  <h2 class="sec-title reveal">Semplice come<br><em>una passeggiata al mare.</em></h2>
-  <p class="sec-lead reveal" style="max-width:520px">Tre passi. Nessuna app da scaricare. Menu selezionato dal tuo hotel, consegna dal ristorante di fiducia dell'albergatore.</p>
-  <div class="how-grid">
-    <div class="how-card reveal" data-n="1">
-      <span class="icon">📱</span>
-      <h3>Scansiona il QR code</h3>
-      <p>Lo trovi in camera. Accedi al menu riservato al tuo hotel — ristoranti, bar e pasticcerie selezionati dall'albergatore, quelli di cui si fida.</p>
+<!-- POSIZIONAMENTO ANTI-GLOVO -->
+<section class="posiz-sec reveal">
+  <div class="posiz-left">
+    <div class="eyebrow" style="color:rgba(245,230,200,.55)"><span style="display:block;width:26px;height:2px;background:rgba(245,230,200,.35)"></span>Differenziale</div>
+    <div class="posiz-headline">Non siamo Glovo.<br><em>Non siamo Deliveroo.</em></div>
+    <p class="posiz-sub">Quei servizi vendono comodità anonima. Saporì costruisce una relazione strutturata tra hotel, ristorante locale e ospite — con menù concordati, ordini programmati e qualità garantita dall'albergatore.</p>
+  </div>
+  <div class="posiz-right">
+    <div class="vs-head">
+      <div class="vs-head-col">Delivery tradizionale</div>
+      <div class="vs-divider"></div>
+      <div class="vs-head-col" style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.05rem;letter-spacing:0;text-transform:none;color:var(--arancio)">Saporì</div>
     </div>
-    <div class="how-card reveal" data-n="2">
-      <span class="icon">🍽️</span>
-      <h3>Scegli e ordina</h3>
-      <p>Scegli i piatti dal menu dedicato. Colazione: ordina entro le 21:00 della sera prima. Paghi online, conferma immediata.</p>
+    <div class="vs-row">
+      <div class="vs-col">Catalogo anonimo di centinaia di locali</div>
+      <div class="vs-divider"></div>
+      <div class="vs-col">Menù curato e dedicato all'hotel</div>
     </div>
-    <div class="how-card reveal" data-n="3">
-      <span class="icon">🛵</span>
-      <h3>Il ristorante consegna</h3>
-      <p>Il partner scelto dall'hotel consegna direttamente in struttura. Colazione 8:30, pranzo 12:30–13:30, cena 20:00–21:00.</p>
+    <div class="vs-row">
+      <div class="vs-col">L'ospite cerca da solo</div>
+      <div class="vs-divider"></div>
+      <div class="vs-col">L'albergatore ha già scelto i partner</div>
+    </div>
+    <div class="vs-row">
+      <div class="vs-col">Ordini spot, nessuna pianificazione</div>
+      <div class="vs-divider"></div>
+      <div class="vs-col">Ordini programmati, cucina organizzata</div>
+    </div>
+    <div class="vs-row">
+      <div class="vs-col">Rider generico, qualità variabile</div>
+      <div class="vs-divider"></div>
+      <div class="vs-col">Ristorante di fiducia, standard concordati</div>
+    </div>
+    <div class="vs-row">
+      <div class="vs-col">Nessuna relazione con l'hotel</div>
+      <div class="vs-divider"></div>
+      <div class="vs-col">L'hotel è parte integrante del servizio</div>
     </div>
   </div>
 </section>
 
-<!-- TABS -->
-<section class="tabs-sec" id="per-chi">
-  <div class="tabs-header reveal">
-    <div class="eyebrow">Per chi è Saporì</div>
-    <h2 class="sec-title">Un servizio per <em>tutti.</em></h2>
+<!-- COME FUNZIONA -->
+<section class="how-sec" id="come-funziona">
+  <div class="eyebrow reveal">Come funziona per l'hotel</div>
+  <h2 class="sec-title reveal">Quattro passi.<br><em>Zero operatività.</em></h2>
+  <p class="sec-lead reveal" style="max-width:520px">Saporì si occupa di tutto. Tu scegli i partner, attivi il servizio e lasci che i tuoi ospiti mangino bene — senza assumere personale aggiuntivo.</p>
+  <div class="how-grid" style="grid-template-columns:repeat(2,1fr)">
+    <div class="how-card reveal" data-n="1">
+      <svg class="how-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="4" width="24" height="28" rx="3" stroke="#C8341A" stroke-width="1.8"/>
+        <path d="M12 4v2a2 2 0 004 0V4M20 4v2a2 2 0 004 0V4" stroke="#C8341A" stroke-width="1.8"/>
+        <path d="M11 16h14M11 21h10" stroke="#C8341A" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="27" cy="28" r="6" fill="#C8341A"/>
+        <path d="M24 28l2 2 4-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h3>Scegli i tuoi partner</h3>
+      <p>Indichi a Saporì i ristoranti, bar e pasticcerie di fiducia. Concordate insieme il menù settimanale dedicato al tuo hotel.</p>
+    </div>
+    <div class="how-card reveal" data-n="2">
+      <svg class="how-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="4" y="8" width="18" height="22" rx="3" stroke="#C8341A" stroke-width="1.8"/>
+        <path d="M9 13h8M9 18h6M9 23h4" stroke="#C8341A" stroke-width="1.8" stroke-linecap="round"/>
+        <rect x="18" y="4" width="14" height="14" rx="2" stroke="#C8341A" stroke-width="1.8"/>
+        <path d="M21 8h8M21 11h5" stroke="#C8341A" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <h3>Posizioni il QR code</h3>
+      <p>Saporì ti fornisce un QR code personalizzato. Lo posizioni in camera o in reception: l'ospite lo scansiona e accede al menù.</p>
+    </div>
+    <div class="how-card reveal" data-n="3">
+      <svg class="how-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="18" cy="18" r="13" stroke="#C8341A" stroke-width="1.8"/>
+        <path d="M18 11v7l4 4" stroke="#C8341A" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M10 7l2 2M26 7l-2 2" stroke="#C8341A" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <h3>Gli ospiti ordinano in autonomia</h3>
+      <p>L'ospite sceglie dal menù concordato, paga online e riceve conferma. Nessuna chiamata al front desk, nessuna gestione manuale.</p>
+    </div>
+    <div class="how-card reveal" data-n="4">
+      <svg class="how-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="28" r="3" stroke="#C8341A" stroke-width="1.8"/>
+        <circle cx="26" cy="28" r="3" stroke="#C8341A" stroke-width="1.8"/>
+        <path d="M4 28H7M13 28h10M29 28h3" stroke="#C8341A" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M4 28V18l4-6h14l4 6v4H4" stroke="#C8341A" stroke-width="1.8" stroke-linejoin="round"/>
+        <path d="M14 12v8M22 16H14" stroke="#C8341A" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <h3>Il ristorante consegna in struttura</h3>
+      <p>Il partner ritira l'ordine programmato e consegna in hotel. Colazione entro le 8:30, pranzo 12:30–13:30, cena 20:00–21:00.</p>
+    </div>
   </div>
-  <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('ospiti',this)" data-ph="tab_ospiti">🏖️ Ospiti e turisti</button>
-    <button class="tab-btn" onclick="switchTab('hotel',this)" data-ph="tab_hotel">🏨 Albergatori</button>
+</section>
+
+<!-- TARGET INTRO -->
+<div class="target-intro reveal">
+  <div class="eyebrow">Per chi è Saporì</div>
+  <h2 class="sec-title" style="max-width:560px">Per l'albergatore, il ristoratore,<br><em>e il loro ospite.</em></h2>
+</div>
+
+<!-- OSPITI -->
+<section class="ospiti-sec" id="ospiti">
+  <div class="ospiti-grid">
+    <div class="osp-l reveal">
+      <div class="eyebrow">Ospiti e turisti</div>
+      <h2><em>Vacanza vera.</em><br>Senza pensieri.</h2>
+      <p>Sei in hotel, fuori fa caldo, hai fame. Non vuoi cercare un ristorante. Con Saporì ordini dal telefono: arriva il cibo dai locali già selezionati dal tuo albergatore — quelli di cui si fida e che conosce.</p>
+      <ul class="chklist">
+        <li><span class="ck"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Menu dedicato al tuo hotel — non un catalogo anonimo</li>
+        <li><span class="ck"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Colazione, pranzo e cena — pensione completa senza cucina in hotel</li>
+        <li><span class="ck"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Ristoranti, bar e pasticcerie scelti dall'albergatore</li>
+        <li><span class="ck"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Pagamento online — zero contante, zero code</li>
+        <li><span class="ck"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Qualità da ristorante, orari garantiti</li>
+      </ul>
+      
+    </div>
+    <div class="osp-r" data-i="🌊">
+      <blockquote>"Finalmente una vacanza dove i pasti sono un piacere, non un problema da risolvere ogni giorno."</blockquote>
+      <cite>Ospite · Hotel 3 stelle · Bellaria</cite>
+      <div class="hbox"><strong>8:30 · 13:00 · 20:30</strong><span>In hotel, all'orario concordato.</span></div>
+    </div>
   </div>
-  <div class="tab-body">
-    <div class="tab-pane active" id="tab-ospiti">
-      <div class="pane-l reveal">
-        <h2>Vacanza vera.<br><em>Senza pensieri.</em></h2>
-        <p>Sei in hotel, fuori fa caldo, hai fame. Non hai voglia di cercare un ristorante. Con Saporì ordini dal telefono: arriva il cibo dai locali scelti dal tuo albergatore, quelli che conosce e di cui si fida.</p>
-        <ul class="benefit-list">
-          <li><span class="ck">✓</span>Menu dedicato al tuo hotel — non un catalogo anonimo</li>
-          <li><span class="ck">✓</span>Colazione, pranzo e cena: pensione completa senza cucina in hotel</li>
-          <li><span class="ck">✓</span>Ristoranti, bar e pasticcerie selezionati dall'albergatore</li>
-          <li><span class="ck">✓</span>Pagamento sicuro online — zero contante, zero code</li>
-          <li><span class="ck">✓</span>Qualità da ristorante, prezzi onesti</li>
-        </ul>
-        <a href="#contatti" class="btn-primary" data-ph="tab_cta_ospiti">Scopri il menu del tuo hotel →</a>
+</section>
+
+<!-- ALBERGATORI -->
+<section class="alb-sec" id="albergatori">
+  <div class="alb-intro reveal">
+    <div class="eyebrow">Albergatori</div>
+    <h2><em>Pensione completa.</em><br>Senza assumere nessuno.</h2>
+    <p>Personale stagionale introvabile, cucina costosa, ospiti che chiedono dove mangiare. Saporì ti permette di offrire pensione completa scegliendo tu i ristoranti e i bar di fiducia — con menù settimanali dedicati al tuo hotel. Scegli il piano che fa per te.</p>
+  </div>
+
+  <div class="piani-grid">
+    <!-- PIANO FLEX -->
+    <div class="piano reveal">
+      <div class="piano-badge">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2v4M10 14v4M2 10h4M14 10h4M4.9 4.9l2.8 2.8M12.3 12.3l2.8 2.8M4.9 15.1l2.8-2.8M12.3 7.7l2.8-2.8" stroke="#C8341A" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="piano-name">Piano Flex</span>
       </div>
-      <div class="pane-r" data-icon="🌊">
-        <blockquote>"Finalmente una vacanza dove i pasti sono un piacere, non un problema da risolvere ogni giorno."</blockquote>
-        <cite>Ospite · Hotel 3 stelle · Bellaria</cite>
-        <div class="highlight-box">
-          <strong>8:30 · 13:00 · 20:30</strong>
-          <span>I tuoi tre momenti. Dove vuoi tu.</span>
-        </div>
+      <div class="piano-title">À la carte.<br>Zero vincoli.</div>
+      <div class="piano-tag">Ideale per: colazione e mezza pensione</div>
+      <p class="piano-desc">L'ospite sceglie giorno per giorno cosa ordinare dal menù dedicato al tuo hotel e paga autonomamente tramite Saporì. Tu metti a disposizione gli spazi e garantisci l'accoglienza. Nessun costo fisso per l'albergatore.</p>
+      <ul class="piano-feats">
+        <li><span class="ck"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Zero costi per l'hotel — paga solo l'ospite</li>
+        <li><span class="ck"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Scegli tu ristoranti, bar e pasticcerie partner</li>
+        <li><span class="ck"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Menù settimanale concordato con il ristorante</li>
+        <li><span class="ck"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Decidi quali pasti attivare (colazione, pranzo, cena)</li>
+        <li><span class="ck"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Un QR code in camera — il resto lo gestisce Saporì</li>
+      </ul>
+      <div class="piano-cta">
+        <a href="#" class="btn btn-red" onclick="openModal(event,'albergatore')" data-ph="piano_flex_cta">Attiva il Piano Flex</a>
       </div>
     </div>
-    <div class="tab-pane" id="tab-hotel">
-      <div class="pane-l reveal">
-        <h2>Pensione completa.<br><em>Senza assumere nessuno.</em></h2>
-        <p>Personale stagionale introvabile, cucina costosa, ospiti che chiedono dove mangiare. Saporì ti permette di offrire pensione completa scegliendo tu i ristoranti, bar e pasticcerie di fiducia — con menu settimanali dedicati al tuo hotel. Il delivery lo gestisce il ristorante partner.</p>
-        <ul class="benefit-list">
-          <li><span class="ck">✓</span>Zero costi — aderisci gratis, per sempre</li>
-          <li><span class="ck">✓</span>Scegli tu i partner: dalla rete Saporì o i tuoi contatti locali</li>
-          <li><span class="ck">✓</span>Menu settimanale dedicato al tuo hotel, concordato col ristorante</li>
-          <li><span class="ck">✓</span>Decidi quali pasti attivare — colazione, pranzo, cena o tutti e tre</li>
-          <li><span class="ck">✓</span>Un QR code in camera: il resto lo gestiscono ristorante e Saporì</li>
-          <li><span class="ck">✓</span>Ospiti soddisfatti, recensioni migliori, zero operatività in più</li>
-        </ul>
-        <a href="#contatti" class="btn-primary" style="background:var(--arancio)" data-ph="tab_cta_hotel">Aderire è gratuito — scrivici →</a>
+
+    <!-- PIANO FULL BOARD -->
+    <div class="piano featured reveal">
+      <div class="piano-badge">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 5 5.6.8-4 4 .9 5.5L10 14.5 5.1 17.3 6 11.8 2 7.8l5.6-.8L10 2z" stroke="#E8831A" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        <span class="piano-name">Piano Full Board</span>
       </div>
-      <div class="pane-r" data-icon="🏨">
-        <blockquote>"I miei ospiti mi chiedevano sempre dove mangiare. Adesso trovano tutto in camera, con il menu che ho scelto io. E non mi costa niente."</blockquote>
-        <cite>Albergatore partner · Bellaria-Igea Marina</cite>
-        <div class="highlight-box">
-          <strong>€0</strong>
-          <span>Costo per l'hotel. Per sempre. Nessun vincolo.</span>
-        </div>
+      <div class="piano-title">Pensione completa.<br>Inclusa nel soggiorno.</div>
+      <div class="piano-tag">Ideale per: pensione completa e pacchetti vacanza</div>
+      <p class="piano-desc">L'ospite non paga nulla al momento del pasto — ha già pagato in hotel. Tu includi i pasti nel prezzo del soggiorno e Saporì coordina tutto con il ristorante partner a una tariffa concordata per ospite/pasto.</p>
+      <ul class="piano-feats">
+        <li><span class="ck" style="background:var(--arancio)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Vendi pensione completa senza cucina interna</li>
+        <li><span class="ck" style="background:var(--arancio)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Menu dedicato e tariffe concordate con il ristorante</li>
+        <li><span class="ck" style="background:var(--arancio)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>L'ospite vive un'esperienza fluida — zero transazioni al pasto</li>
+        <li><span class="ck" style="background:var(--arancio)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Saporì coordina ordini e logistica — tu accogli</li>
+        <li><span class="ck" style="background:var(--arancio)"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Tariffa Saporì per ospite/pasto — dettagli in call</li>
+      </ul>
+      <div class="piano-cta">
+        <a href="#" class="btn btn-orange" onclick="openModal(event,'albergatore')" data-ph="piano_fullboard_cta">Scopri il Piano Full Board</a>
       </div>
+    </div>
+  </div>
+
+  <div class="alb-note reveal">
+    <strong>Standard di servizio:</strong> l'albergatore garantisce la ricezione dei pasti in struttura e il mantenimento in caldo dove necessario. Nessun servizio ai tavoli richiesto al personale Saporì — l'ospite ritira o viene servito dallo staff dell'hotel secondo la propria consuetudine.
+  </div>
+</section>
+
+<!-- RISTORATORI -->
+<section class="ris-sec" id="ristoratori">
+  <div class="ris-l reveal">
+    <div class="eyebrow">Ristoratori, bar e pasticcerie</div>
+    <h2 class="sec-title">Diventa la cucina<br><em>dell'hotel.</em></h2>
+    <p class="sec-lead" style="margin-bottom:28px">L'albergatore ti sceglie come partner. I suoi ospiti diventano i tuoi clienti fissi — con ordini programmati in anticipo e menù concordati settimanalmente.</p>
+    <ul class="ris-feats">
+      <li>
+        <svg class="fi" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="12" rx="2" stroke="#C8341A" stroke-width="1.4"/><path d="M6 8h8M6 11h5" stroke="#C8341A" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <div><strong>Ordini programmati in anticipo</strong><span>Ricevi l'elenco prima del servizio. Pianifichi la cucina senza sorprese.</span></div>
+      </li>
+      <li>
+        <svg class="fi" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#C8341A" stroke-width="1.4"/><path d="M7 10l2 2 4-4" stroke="#C8341A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><strong>Zero costi di ingresso</strong><span>Nessuna fee, nessun abbonamento. Partecipi solo quando vendi.</span></div>
+      </li>
+      <li>
+        <svg class="fi" viewBox="0 0 20 20" fill="none"><rect x="3" y="4" width="14" height="13" rx="1" stroke="#C8341A" stroke-width="1.4"/><path d="M7 2v4M13 2v4M3 8h14" stroke="#C8341A" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <div><strong>Menù settimanale concordato</strong><span>Base fissa con l'albergatore — pianifichi senza caos quotidiano.</span></div>
+      </li>
+      <li>
+        <svg class="fi" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#C8341A" stroke-width="1.4"/><path d="M10 6v4l3 3" stroke="#C8341A" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <div><strong>Scegli tu le fasce orarie</strong><span>Colazione, pranzo o cena — nessun impegno fuori dai tuoi orari.</span></div>
+      </li>
+      <li>
+        <svg class="fi" viewBox="0 0 20 20" fill="none"><path d="M3 16l4-4 4 2 6-8" stroke="#C8341A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <div><strong>Coperti aggiuntivi garantiti</strong><span>L'hotel è un canale di vendita fisso. Fatturato in più senza nuovo personale.</span></div>
+      </li>
+    </ul>
+    <a href="#" class="btn btn-red" style="margin-top:28px" onclick="openModal(event,'ristoratore')" data-ph="ris_cta">Diventa partner →</a>
+  </div>
+  <div class="ris-r reveal">
+    <div class="eyebrow">I vantaggi</div>
+    <h2 class="sec-title white">I tuoi prezzi.<br><em>Più clienti.</em></h2>
+    <p class="sec-lead dim" style="margin-bottom:28px">Il coordinamento e la logistica degli ordini sono interamente a cura di Saporì. Tu ti concentri sulla cucina.</p>
+    <div class="ris-vantaggi">
+      <div class="rv">
+        <svg class="rvi" viewBox="0 0 20 20" fill="none"><path d="M10 2l2.4 4.8L18 7.6l-4 3.9.9 5.5L10 14.5l-4.9 2.5.9-5.5L2 7.6l5.6-.8L10 2z" stroke="white" stroke-width="1.3"/></svg>
+        <div><strong>Mantieni il tuo listino</strong><span>Il ristorante incassa sempre il proprio prezzo pieno. Il servizio Saporì è incluso nella tariffa all'ospite.</span></div>
+      </div>
+      <div class="rv">
+        <svg class="rvi" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M10 4v12" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <div><strong>Coperti aggiuntivi netti</strong><span>Clienti che non avresti raggiunto — già presenti, già affamati, già pronti ad ordinare.</span></div>
+      </div>
+      <div class="rv">
+        <svg class="rvi" viewBox="0 0 20 20" fill="none"><rect x="2" y="6" width="16" height="12" rx="1" stroke="white" stroke-width="1.3"/><path d="M6 6V4a4 4 0 018 0v2" stroke="white" stroke-width="1.3"/></svg>
+        <div><strong>Nessun rider da gestire</strong><span>Saporì si occupa del coordinamento. La consegna è organizzata con il tuo staff esistente o concordata caso per caso.</span></div>
+      </div>
+      <div class="rv">
+        <svg class="rvi" viewBox="0 0 20 20" fill="none"><path d="M10 2C6.7 2 4 4.7 4 8c0 5 6 10 6 10s6-5 6-10c0-3.3-2.7-6-6-6z" stroke="white" stroke-width="1.3"/><circle cx="10" cy="8" r="2" stroke="white" stroke-width="1.3"/></svg>
+        <div><strong>Radici locali, valore locale</strong><span>Saporì valorizza solo ristoranti del territorio — nessuna concorrenza con piattaforme nazionali.</span></div>
+      </div>
+    </div>
+    <div class="ris-note">
+      <strong>Nota logistica:</strong> il coordinamento e la gestione degli ordini è interamente a cura di Saporì. La consegna fisica viene concordata con ogni partner in base alla struttura operativa del locale.
     </div>
   </div>
 </section>
 
 <!-- STEPS -->
-<section class="steps-sec reveal" id="ordina">
+<section class="steps-sec reveal" id="come-funziona-ospiti">
   <div class="eyebrow">Come ordinare</div>
-  <h2 class="sec-title">Quattro passi.<br><em>Tutto il giorno con te.</em></h2>
-  <p class="sec-lead">Nessuna app da scaricare. Funziona su qualsiasi telefono. Colazione: ordina la sera prima entro le 21:00.</p>
+  <h2 class="sec-title white">Come ordina il tuo ospite.<br><em>Senza disturbarti.</em></h2>
+  <p class="sec-lead dim" style="max-width:500px">Nessuna app da scaricare. Funziona su qualsiasi telefono. Per la colazione: ordina la sera prima entro le 21:00.</p>
   <div class="steps-grid">
-    <div class="step-card">
+    <div class="step">
       <div class="step-n">01</div>
       <h3>Scansiona il QR</h3>
-      <p>In camera o in reception. Accedi al menu dedicato al tuo hotel.</p>
+      <p>In camera o in reception. Menu dedicato al tuo hotel.</p>
       <span class="step-arr">→</span>
     </div>
-    <div class="step-card">
+    <div class="step">
       <div class="step-n">02</div>
       <h3>Scegli i piatti</h3>
-      <p>Menu settimanale concordato. Ristoranti scelti dall'albergatore. Allergeni indicati.</p>
+      <p>Menù settimanale. Ristoranti scelti dall'albergatore. Allergeni indicati.</p>
       <span class="step-arr">→</span>
     </div>
-    <div class="step-card">
+    <div class="step">
       <div class="step-n">03</div>
       <h3>Paga e conferma</h3>
-      <p>Carta, Satispay o Apple Pay. Conferma istantanea sul telefono.</p>
+      <p>Carta, Satispay o Apple Pay. Conferma istantanea.</p>
       <span class="step-arr">→</span>
     </div>
-    <div class="step-card">
+    <div class="step">
       <div class="step-n">04</div>
       <h3>Ricevi e mangia</h3>
       <p>Il ristorante partner consegna in hotel all'orario garantito.</p>
@@ -493,367 +838,265 @@ footer p{font-size:.74rem;color:rgba(255,255,255,.24);}
   </div>
 </section>
 
-<!-- RISTORATORI -->
-<section class="risto-sec" id="ristoratori">
-  <div class="risto-l reveal">
-    <div class="eyebrow">Per ristoratori, bar e pasticcerie</div>
-    <h2 class="sec-title">Diventa la cucina<br><em>dell'hotel.</em></h2>
-    <p class="sec-lead">L'albergatore ti sceglie come partner. Tu diventi il suo fornitore di pasti — l'hotel è il tuo canale di vendita diretto, con clienti già presenti e ordini programmati in anticipo.</p>
-    <ul class="risto-features">
-      <li><span class="ico">📋</span><div><strong>Ordini programmati in anticipo</strong><span>Ricevi l'elenco prima del servizio. Pianifichi senza sorprese.</span></div></li>
-      <li><span class="ico">🚫</span><div><strong>Zero costi di ingresso</strong><span>Nessuna fee, nessun abbonamento. Guadagni solo quando vendi.</span></div></li>
-      <li><span class="ico">📅</span><div><strong>Menu settimanale concordato</strong><span>Base fissa con l'albergatore. Nessun caos quotidiano nel piatto del giorno.</span></div></li>
-      <li><span class="ico">🕐</span><div><strong>Tu scegli le fasce orarie</strong><span>Decidi quali pasti coprire. Nessun impegno fuori dai tuoi orari.</span></div></li>
-      <li><span class="ico">📈</span><div><strong>Coperti aggiuntivi garantiti</strong><span>L'hotel è un canale di vendita fisso. Fatturato in più senza nuovo personale.</span></div></li>
-    </ul>
-    <a href="#contatti" class="btn-primary" style="margin-top:28px;display:inline-flex" data-ph="risto_cta">Diventa partner →</a>
-  </div>
-  <div class="risto-r reveal">
-    <div class="eyebrow">Il modello economico</div>
-    <h2 class="sec-title">Prezzi tuoi.<br><em>Più il 20%.</em></h2>
-    <p class="sec-lead">Il prezzo che l'ospite vede nell'app è il tuo listino maggiorato del 20%. Tu incassi il tuo prezzo pieno. Saporì trattiene la differenza per gestire piattaforma, ordini e coordinamento. Win–win.</p>
-    <div class="math-box">
-      <div class="math-row"><span class="ml">Tuo prezzo di listino</span><span class="mv">€ 35</span></div>
-      <div class="math-row"><span class="ml">Prezzo mostrato all'ospite (+20%)</span><span class="mv">€ 42</span></div>
-      <div class="math-row"><span class="ml">Logistica e coordinamento</span><span class="mv">a cura tua</span></div>
-      <div class="math-row tot"><span class="ml">Incassi tu</span><span class="mv">€ 35</span></div>
-    </div>
-    <div class="math-note">Su 15 ordini/giorno: +€525 di fatturato aggiuntivo al tuo listino, su clienti che non avresti mai avuto.</div>
-    <a href="#contatti" class="btn-primary" style="margin-top:26px;display:inline-flex" data-ph="risto_cta_math">Parliamoci →</a>
-  </div>
-</section>
-
 <!-- ZONA -->
 <section class="zona-sec reveal">
   <div class="eyebrow center">Dove operiamo</div>
   <h2 class="sec-title">Bellaria-Igea Marina.<br><em>Estate 2026.</em></h2>
-  <p class="sec-lead">Lanciamo a Bellaria-Igea Marina nell'estate 2026. I posti per hotel e ristoranti partner sono limitati — la lista d'attesa è aperta adesso.</p>
+  <p class="sec-lead" style="max-width:480px;margin:0 auto 40px">Lanciamo a Bellaria-Igea Marina nell'estate 2026. I posti per hotel e ristoranti partner sono limitati.</p>
   <div class="comuni">
     <div class="chip now">📍 Bellaria-Igea Marina · 2026</div>
     <div class="chip">Rimini · 2027</div>
     <div class="chip">Riccione · 2027</div>
     <div class="chip">Cattolica · 2027</div>
     <div class="chip">Cesenatico · 2027</div>
-    <div class="chip">Cervia · 2027</div>
   </div>
-  <p class="zona-note">Sei in uno dei comuni 2027? <a href="#contatti" style="color:var(--rosso)">Iscriviti in lista d'attesa →</a></p>
+  <p class="zona-note">Sei in uno dei comuni 2027? <a href="#" onclick="openModal(event,'')" style="color:var(--rosso);text-decoration:none;cursor:pointer">Iscriviti in lista d'attesa →</a></p>
 </section>
 
-<!-- FORM -->
-<section class="form-sec" id="contatti">
-  <div class="eyebrow reveal">Prenota il tuo posto</div>
-  <h2 class="sec-title reveal">Sei pronto per<br><em>l'estate 2026?</em></h2>
-  <p class="sec-lead reveal">I partner per la stagione 2026 saranno selezionati nelle prossime settimane. Compila il modulo: ti ricontattiamo entro 48 ore.</p>
-
-  <div class="form-wrap">
-    <!-- LEFT INFO -->
-    <div class="reveal">
-      <div class="fi-item">
-        <span class="fi-icon">⚡</span>
-        <div><strong>Risposta entro 48 ore</strong><span>Valutiamo ogni richiesta e ti ricontattiamo personalmente per esplorare la collaborazione.</span></div>
-      </div>
-      <div class="fi-item">
-        <span class="fi-icon">🔒</span>
-        <div><strong>Nessun impegno</strong><span>L'iscrizione non è vincolante. Esploriamo insieme se Saporì fa per te.</span></div>
-      </div>
-      <div class="fi-item">
-        <span class="fi-icon">🏨</span>
-        <div><strong>Per albergatori</strong><span>Zero costi. Scegli i ristoranti partner, i pasti da attivare, il menu da offrire ai tuoi ospiti.</span></div>
-      </div>
-      <div class="fi-item">
-        <span class="fi-icon">🍽️</span>
-        <div><strong>Per ristoranti, bar e pasticcerie</strong><span>Ordini garantiti e programmati, menu concordato, zero costi di ingresso.</span></div>
-      </div>
-    </div>
-
-    <!-- RIGHT FORM -->
-    <div class="form-panel reveal" id="form-container">
-      <!-- role -->
-      <div class="role-selector" id="role-selector">
-        <div class="role-btn active" id="role-alb" onclick="selectRole('albergatore')">
-          <span class="rb-icon">🏨</span>
-          <span class="rb-label">Albergatore</span>
-          <div class="rb-sub">Hotel, B&B, pensione</div>
-        </div>
-        <div class="role-btn" id="role-ris" onclick="selectRole('ristoratore')">
-          <span class="rb-icon">🍽️</span>
-          <span class="rb-label">Ristoratore</span>
-          <div class="rb-sub">Ristorante, bar, pasticceria</div>
-        </div>
-      </div>
-
-      <div class="form-fields" id="form-fields">
-        <!-- comuni -->
-        <div class="field-row">
-          <div class="fw">
-            <label>Nome e cognome *</label>
-            <input type="text" id="f-nome" placeholder="Mario Rossi">
-          </div>
-          <div class="fw">
-            <label>Telefono</label>
-            <input type="tel" id="f-tel" placeholder="+39 333 000 0000">
-          </div>
-        </div>
-        <div class="field-row full">
-          <div class="fw">
-            <label>Email *</label>
-            <input type="email" id="f-email" placeholder="mario@esempio.it">
-          </div>
-        </div>
-
-        <!-- albergatore -->
-        <div class="cond show" id="cond-alb">
-          <div class="field-row">
-            <div class="fw">
-              <label>Nome della struttura *</label>
-              <input type="text" id="f-struttura" placeholder="Hotel Adriatico">
-            </div>
-            <div class="fw">
-              <label>N° camere</label>
-              <select id="f-camere">
-                <option value="">Seleziona</option>
-                <option>Meno di 10</option>
-                <option>10–20</option>
-                <option>21–40</option>
-                <option>41–60</option>
-                <option>Oltre 60</option>
-              </select>
-            </div>
-          </div>
-          <div class="check-group">
-            <label>Pasti di interesse</label>
-            <div class="check-items">
-              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">☀️ Colazione</span></div>
-              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">🍝 Pranzo</span></div>
-              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">🦞 Cena</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- ristoratore -->
-        <div class="cond" id="cond-ris">
-          <div class="field-row">
-            <div class="fw">
-              <label>Nome del locale *</label>
-              <input type="text" id="f-locale" placeholder="Osteria del Porto">
-            </div>
-            <div class="fw">
-              <label>Tipo di locale</label>
-              <select id="f-tipo">
-                <option value="">Seleziona</option>
-                <option>Ristorante</option>
-                <option>Trattoria / Osteria</option>
-                <option>Bar / Caffetteria</option>
-                <option>Pasticceria</option>
-                <option>Rosticceria</option>
-                <option>Altro</option>
-              </select>
-            </div>
-          </div>
-          <div class="field-row full">
-            <div class="fw">
-              <label>Coperti medi al giorno</label>
-              <select id="f-coperti">
-                <option value="">Seleziona</option>
-                <option>Meno di 30</option>
-                <option>30–60</option>
-                <option>61–100</option>
-                <option>Oltre 100</option>
-              </select>
-            </div>
-          </div>
-          <div class="check-group">
-            <label>Fasce orarie disponibili</label>
-            <div class="check-items">
-              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">☀️ Colazione</span></div>
-              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">🍝 Pranzo</span></div>
-              <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><span class="ci-lbl">🦞 Cena</span></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- messaggio -->
-        <div class="field-row full">
-          <div class="fw">
-            <label>Domande o note</label>
-            <textarea id="f-msg" placeholder="Scrivi qui qualsiasi domanda o informazione utile..."></textarea>
-          </div>
-        </div>
-
-        <!-- privacy -->
-        <div class="priv-row">
-          <input type="checkbox" id="f-privacy">
-          <label for="f-privacy">Acconsento al trattamento dei dati personali ai sensi dell'art. 13 GDPR. I dati saranno utilizzati esclusivamente per contattarti riguardo a Saporì. <a href="#">Privacy policy</a>.</label>
-        </div>
-
-        <div class="form-error" id="form-error"></div>
-
-        <button class="submit-btn" id="submit-btn" onclick="submitForm()">
-          <span id="btn-text">Invia richiesta</span>
-          <span id="btn-arr">→</span>
-        </button>
-      </div>
-
-      <!-- success -->
-      <div class="form-success" id="form-success">
-        <div class="fs-icon">🎉</div>
-        <h3>Richiesta inviata!</h3>
-        <p>Ti ricontattiamo entro 48 ore per esplorare insieme la collaborazione.<br>Grazie per l'interesse in Saporì.</p>
-      </div>
-    </div>
+<!-- CTA FINALE -->
+<section class="cta-sec reveal">
+  <div class="eyebrow">Iscriviti ora</div>
+  <h2 class="cta-title">Sei pronto per<br><em>l'estate 2026?</em></h2>
+  <p class="cta-lead">I partner per la stagione 2026 saranno selezionati nelle prossime settimane. Compila il modulo: ti ricontattiamo entro 48 ore.</p>
+  <div class="cta-btns">
+    <a href="#" class="btn btn-white" onclick="openModal(event,'albergatore')" data-ph="cta_alb">Sono un albergatore</a>
+    <a href="#" class="btn btn-orange" onclick="openModal(event,'ristoratore')" data-ph="cta_ris">Sono un ristoratore</a>
   </div>
 </section>
 
 <footer>
-  <div class="foot-logo">Saporì</div>
+  <div class="foot-logo">Sapor<span class="logo-i">ì</span></div>
   <p>© 2026 Saporì · Bellaria-Igea Marina</p>
   <div class="foot-links">
-    <a href="#">Privacy policy</a>
-    <a href="#">Cookie</a>
-    <a href="mailto:info@sapori.app">info@sapori.app</a>
+    <a href="#" onclick="openPrivacy(event)">Privacy policy</a>
+    <a href="#" onclick="openCookie(event)">Cookie policy</a>
   </div>
 </footer>
 
 <script>
-// ─────────────────────────────────────────────────────────────────
-// EMAILJS — istruzioni configurazione:
-//
-// 1. Vai su emailjs.com → Sign Up (gratuito, 200 email/mese)
-// 2. "Add New Service" → Gmail → autorizza con alessandropracucci@gmail.com
-//    Copia il SERVICE ID (es. service_abc123)
-// 3. "Email Templates" → Create New Template
-//    Subject: Nuova richiesta Saporì — {{role}} — {{nome}}
-//    Body (testo):
-//      Tipo: {{role}}
-//      Nome: {{nome}}
-//      Email: {{email}}
-//      Telefono: {{tel}}
-//      Struttura/Locale: {{struttura}}
-//      Dettagli: {{dettagli}}
-//      Pasti: {{pasti}}
-//      Messaggio: {{messaggio}}
-//    To Email: alessandropracucci@gmail.com
-//    Copia il TEMPLATE ID (es. template_xyz789)
-// 4. "Account" → "Public Key" → copiala
-// 5. Sostituisci i tre valori qui sotto:
-// ─────────────────────────────────────────────────────────────────
-const EJS_KEY      = 'YOUR_PUBLIC_KEY';    // es. 'AbCdEfGhIjKlMnOp'
-const EJS_SERVICE  = 'YOUR_SERVICE_ID';   // es. 'service_abc123'
-const EJS_TEMPLATE = 'YOUR_TEMPLATE_ID';  // es. 'template_xyz789'
+// ── FORMSUBMIT CONFIG ──
+// Sostituisci YOUR_EMAIL con alessandropracucci@gmail.com
+// FormSubmit non richiede chiavi API — funziona out of the box su GitHub Pages
+// Primo invio: riceverai un'email di attivazione da FormSubmit
+const FORMSUBMIT_EMAIL = 'alessandropracucci@gmail.com';
 
-emailjs.init(EJS_KEY);
 
-let currentRole = 'albergatore';
-
-function selectRole(role) {
-  currentRole = role;
-  document.getElementById('role-alb').classList.toggle('active', role === 'albergatore');
-  document.getElementById('role-ris').classList.toggle('active', role === 'ristoratore');
-  document.getElementById('cond-alb').classList.toggle('show', role === 'albergatore');
-  document.getElementById('cond-ris').classList.toggle('show', role === 'ristoratore');
-  track('form_role_selected', { role });
+// ── SCROLL INTERNO (funziona anche nell'anteprima Claude) ──
+function scrollSec(id, e){
+  if(e) e.preventDefault();
+  var el = document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
 }
 
-function toggleCheck(el) {
-  el.classList.toggle('checked');
+// ── PRIVACY / COOKIE MODALS ──
+function openPrivacy(e){
+  if(e) e.preventDefault();
+  var el = document.getElementById('privacy-overlay');
+  el.style.display = 'flex';
+}
+function openCookie(e){
+  if(e) e.preventDefault();
+  var el = document.getElementById('cookie-overlay');
+  el.style.display = 'flex';
+}
+function closePrivacyOutside(e, id){
+  if(e.target === document.getElementById(id)){
+    document.getElementById(id).style.display = 'none';
+  }
 }
 
-async function submitForm() {
-  const nome    = document.getElementById('f-nome').value.trim();
-  const email   = document.getElementById('f-email').value.trim();
-  const privacy = document.getElementById('f-privacy').checked;
-  const errEl   = document.getElementById('form-error');
+// ── GDPR ──
+(function(){
+  if(!localStorage.getItem('gdpr_ok')){
+    setTimeout(function(){ document.getElementById('gdpr').classList.add('show'); }, 800);
+  }
+})();
+function gdprAccept(){
+  localStorage.setItem('gdpr_ok','1');
+  document.getElementById('gdpr').classList.remove('show');
+  track('gdpr_accepted',{});
+}
+function gdprReject(){
+  localStorage.setItem('gdpr_ok','minimal');
+  document.getElementById('gdpr').classList.remove('show');
+}
+
+// ── MODAL ──
+let mRole = 'albergatore';
+function openModal(e, role){
+  e.preventDefault();
+  if(role) setRole(role);
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  track('modal_open',{role: mRole});
+}
+function closeModal(){
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeModalOutside(e){
+  if(e.target === document.getElementById('modal-overlay')) closeModal();
+}
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+function setRole(role){
+  mRole = role;
+  document.getElementById('rp-alb').classList.toggle('active', role==='albergatore');
+  document.getElementById('rp-ris').classList.toggle('active', role==='ristoratore');
+  document.getElementById('cond-alb').classList.toggle('show', role==='albergatore');
+  document.getElementById('cond-ris').classList.toggle('show', role==='ristoratore');
+  var titles = {albergatore:'Sei un albergatore?', ristoratore:'Sei un ristoratore?'};
+  document.getElementById('modal-title').textContent = titles[role] || 'Prenota il tuo posto';
+}
+
+function toggleCpill(el){ el.classList.toggle('on'); }
+
+// ── FORM SUBMIT via FormSubmit.co ──
+async function submitForm(){
+  var nome  = document.getElementById('f-nome').value.trim();
+  var email = document.getElementById('f-email').value.trim();
+  var priv  = document.getElementById('f-priv').checked;
+  var errEl = document.getElementById('ferr');
   errEl.style.display = 'none';
 
-  if (!nome)   { showErr('Inserisci il tuo nome e cognome.'); return; }
-  if (!email || !email.includes('@')) { showErr('Inserisci un indirizzo email valido.'); return; }
-  if (!privacy) { showErr('Accetta la privacy policy per procedere.'); return; }
+  if(!nome){ showErr('Inserisci il tuo nome e cognome.'); return; }
+  if(!email || email.indexOf('@')<0){ showErr('Inserisci un email valida.'); return; }
+  if(!priv){ showErr('Accetta la privacy policy per procedere.'); return; }
 
-  const tel = document.getElementById('f-tel').value.trim();
-  const msg = document.getElementById('f-msg').value.trim();
-  let struttura = '', dettagli = '', pasti = '';
+  var tel = document.getElementById('f-tel').value.trim();
+  var msg = document.getElementById('f-msg').value.trim();
+  var struttura = '', dettagli = '', pasti = '';
 
-  if (currentRole === 'albergatore') {
+  if(mRole === 'albergatore'){
     struttura = document.getElementById('f-struttura').value.trim();
     dettagli  = document.getElementById('f-camere').value + ' camere';
-    pasti     = getChecked('#cond-alb');
-    if (!struttura) { showErr('Inserisci il nome della struttura.'); return; }
+    pasti     = getCpills('#cond-alb');
+    if(!struttura){ showErr('Inserisci il nome della struttura.'); return; }
   } else {
     struttura = document.getElementById('f-locale').value.trim();
-    dettagli  = document.getElementById('f-tipo').value + ' · ' + document.getElementById('f-coperti').value + ' coperti/gg';
-    pasti     = getChecked('#cond-ris');
-    if (!struttura) { showErr('Inserisci il nome del locale.'); return; }
+    dettagli  = document.getElementById('f-tipo').value + ' - ' + document.getElementById('f-coperti').value + ' coperti/gg';
+    pasti     = getCpills('#cond-ris');
+    if(!struttura){ showErr('Inserisci il nome del locale.'); return; }
   }
 
-  const btn = document.getElementById('submit-btn');
-  document.getElementById('btn-text').textContent = 'Invio in corso…';
-  document.getElementById('btn-arr').textContent  = '';
+  var btn = document.getElementById('fsub');
+  document.getElementById('fsub-txt').textContent = 'Invio in corso...';
   btn.disabled = true;
 
+  // FormSubmit.co — invia come form data
+  var fd = new FormData();
+  fd.append('_to', FORMSUBMIT_EMAIL);
+  fd.append('_subject', 'Nuova richiesta Sapori - ' + (mRole==='albergatore'?'Albergatore':'Ristoratore') + ' - ' + nome);
+  fd.append('_captcha', 'false');
+  fd.append('_template', 'table');
+  fd.append('Tipo', mRole==='albergatore' ? 'Albergatore' : 'Ristoratore');
+  fd.append('Nome', nome);
+  fd.append('Email', email);
+  fd.append('Telefono', tel || '-');
+  fd.append('Comune', document.getElementById('f-comune').value.trim() || '-');
+  fd.append('Struttura o Locale', struttura);
+  fd.append('Dettagli', dettagli || '-');
+  fd.append('Pasti / Fasce', pasti || '-');
+  fd.append('Messaggio', msg || '-');
+
   try {
-    await emailjs.send(EJS_SERVICE, EJS_TEMPLATE, {
-      role: currentRole === 'albergatore' ? '🏨 Albergatore' : '🍽️ Ristoratore',
-      nome, email, tel: tel || '—',
-      struttura: struttura || '—',
-      dettagli:  dettagli  || '—',
-      pasti:     pasti     || '—',
-      messaggio: msg       || '—'
+    var resp = await fetch('https://formsubmit.co/ajax/' + FORMSUBMIT_EMAIL, {
+      method: 'POST',
+      body: fd,
+      headers: { 'Accept': 'application/json' }
     });
-    document.getElementById('form-fields').style.display = 'none';
-    document.getElementById('role-selector').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-    track('form_submitted', { role: currentRole });
-  } catch(e) {
-    showErr('Errore nell\'invio. Riprova o scrivici a info@sapori.app');
-    document.getElementById('btn-text').textContent = 'Invia richiesta';
-    document.getElementById('btn-arr').textContent  = '→';
+    var data = await resp.json();
+    if(data.success === 'true' || data.success === true){
+      document.getElementById('fform').style.display = 'none';
+      document.querySelectorAll('.role-pills').forEach(function(el){ el.style.display='none'; });
+      document.getElementById('fsuccess').style.display = 'block';
+      track('form_submitted', {role: mRole});
+    } else {
+      throw new Error('FormSubmit error');
+    }
+  } catch(err){
+    showErr('Errore nell\'invio. Scrivi a sapori.app per assistenza.');
+    document.getElementById('fsub-txt').textContent = 'Invia richiesta';
     btn.disabled = false;
-    console.error(e);
+    console.error(err);
   }
 }
 
-function getChecked(scope) {
-  return [...document.querySelectorAll(scope + ' .check-item.checked .ci-lbl')]
-    .map(el => el.textContent).join(', ') || '—';
+function getCpills(scope){
+  var els = document.querySelectorAll(scope + ' .cpill.on');
+  var out = [];
+  els.forEach(function(el){ out.push(el.textContent.trim()); });
+  return out.join(', ') || '-';
 }
 
-function showErr(msg) {
-  const el = document.getElementById('form-error');
-  el.textContent = msg; el.style.display = 'block';
+function showErr(msg){
+  var el = document.getElementById('ferr');
+  el.textContent = msg;
+  el.style.display = 'block';
 }
 
-function switchTab(id, btn) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
-  btn.classList.add('active');
-  track('tab_switched', { tab: id });
+// ── ANALYTICS ──
+function track(name, props){
+  if(typeof gtag !== 'undefined') gtag('event', name, props);
+  if(typeof posthog !== 'undefined') posthog.capture(name, props);
 }
-
-// Analytics
-function track(name, props) {
-  if (typeof gtag     !== 'undefined') gtag('event', name, props);
-  if (typeof posthog  !== 'undefined') posthog.capture(name, props);
-}
-document.querySelectorAll('[data-ph]').forEach(el => {
-  el.addEventListener('click', () => track('cta_click', { id: el.dataset.ph }));
+document.querySelectorAll('[data-ph]').forEach(function(el){
+  el.addEventListener('click', function(){
+    track('cta_click', {id: el.getAttribute('data-ph')});
+  });
 });
 
-// Scroll reveal
-const obs = new IntersectionObserver((entries) => {
-  entries.forEach((e, i) => {
-    if (e.isIntersecting) {
-      setTimeout(() => e.target.classList.add('vis'), i * 60);
+// ── SCROLL REVEAL ──
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e, i){
+    if(e.isIntersecting){
+      setTimeout(function(){ e.target.classList.add('vis'); }, i * 55);
       obs.unobserve(e.target);
     }
   });
-}, { threshold: 0.08 });
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}, {threshold: 0.07});
+document.querySelectorAll('.reveal').forEach(function(el){ obs.observe(el); });
 
-window.addEventListener('scroll', () => {
+// nav shadow
+window.addEventListener('scroll', function(){
   document.getElementById('nav').style.boxShadow =
-    window.scrollY > 30 ? '0 2px 18px rgba(0,0,0,.07)' : 'none';
+    window.scrollY > 30 ? '0 2px 16px rgba(0,0,0,.07)' : 'none';
 });
 </script>
+
+<!-- MODAL PRIVACY POLICY -->
+<div id="privacy-overlay" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(28,14,5,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;" onclick="closePrivacyOutside(event,'privacy-overlay')">
+  <div style="background:#FDF6E9;border-radius:4px;width:100%;max-width:560px;max-height:85vh;overflow-y:auto;position:relative;">
+    <div style="background:#C8341A;padding:22px 28px 18px;position:relative;">
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:700;">Privacy policy</h2>
+      <button onclick="document.getElementById('privacy-overlay').style.display='none'" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:.9rem;">✕</button>
+    </div>
+    <div style="padding:24px 28px;font-family:'DM Sans',sans-serif;font-size:.87rem;line-height:1.72;color:#2A1A0E;">
+      <p style="margin-bottom:12px"><strong>Titolare del trattamento:</strong> Saporì (Bellaria-Igea Marina, RN) — contatto: alessandropracucci@gmail.com</p>
+      <p style="margin-bottom:12px"><strong>Dati raccolti tramite il form:</strong> nome, email, telefono (facoltativo), comune, tipologia di struttura o locale, note. I dati vengono trasmessi via FormSubmit.co e utilizzati esclusivamente per rispondere alla richiesta di contatto.</p>
+      <p style="margin-bottom:12px"><strong>Base giuridica:</strong> consenso esplicito dell'interessato (art. 6, par. 1, lett. a GDPR).</p>
+      <p style="margin-bottom:12px"><strong>Conservazione:</strong> i dati vengono conservati per il tempo strettamente necessario a gestire la richiesta e comunque non oltre 12 mesi dall'ultimo contatto.</p>
+      <p style="margin-bottom:12px"><strong>Diritti:</strong> puoi richiedere accesso, rettifica, cancellazione o limitazione del trattamento scrivendo a alessandropracucci@gmail.com.</p>
+      <p style="color:#6B4423;font-size:.78rem;margin-top:16px;">Documento provvisorio valido per la fase di raccolta contatti pre-lancio. Sarà aggiornato al momento del lancio del servizio.</p>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL COOKIE POLICY -->
+<div id="cookie-overlay" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(28,14,5,.75);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:20px;" onclick="closePrivacyOutside(event,'cookie-overlay')">
+  <div style="background:#FDF6E9;border-radius:4px;width:100%;max-width:560px;max-height:85vh;overflow-y:auto;position:relative;">
+    <div style="background:#C8341A;padding:22px 28px 18px;position:relative;">
+      <h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;font-weight:700;">Cookie policy</h2>
+      <button onclick="document.getElementById('cookie-overlay').style.display='none'" style="position:absolute;top:14px;right:16px;background:rgba(255,255,255,.15);border:none;color:#fff;width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:.9rem;">✕</button>
+    </div>
+    <div style="padding:24px 28px;font-family:'DM Sans',sans-serif;font-size:.87rem;line-height:1.72;color:#2A1A0E;">
+      <p style="margin-bottom:12px"><strong>Cookie tecnici (necessari):</strong> questo sito utilizza localStorage per ricordare il consenso al banner GDPR. Nessun dato personale viene condiviso con terze parti tramite questo cookie.</p>
+      <p style="margin-bottom:12px"><strong>Cookie analitici:</strong> il sito utilizza Google Analytics 4 (GA4) e PostHog per analisi aggregata degli accessi. Questi strumenti possono impostare cookie propri. I dati raccolti sono anonimi e non consentono l'identificazione personale.</p>
+      <p style="margin-bottom:12px"><strong>Cookie di terze parti:</strong> Google Fonts carica font dal CDN Google. Consulta la privacy policy di Google per dettagli.</p>
+      <p style="margin-bottom:12px">Non utilizziamo cookie di profilazione o remarketing pubblicitario.</p>
+      <p style="color:#6B4423;font-size:.78rem;margin-top:16px;">Documento provvisorio valido per la fase di raccolta contatti pre-lancio.</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
